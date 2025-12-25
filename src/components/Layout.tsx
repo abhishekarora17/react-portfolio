@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 import RightNav from "./RightNav";
+// import CodeCursorTrail from "../sections/CodeCursorTrail";
+
 
 interface LayoutProps {
   children: ReactNode;
@@ -7,9 +9,15 @@ interface LayoutProps {
 
 export default function Layout({ children }: Readonly<LayoutProps>) {
   return (
-    <div className="min-h-screen bg-bg flex">
+    <div className="relative min-h-screen bg-bg">
+      {/* Code-style mouse trail */}
+      {/* <CodeCursorTrail /> */}
+
+      {/* Right-side navigation */}
       <RightNav />
-      <main className="w-full px-12 md:px-24">{children}</main>
+
+      {/* Main content */}
+      <main className="w-full">{children}</main>
     </div>
   );
 }
