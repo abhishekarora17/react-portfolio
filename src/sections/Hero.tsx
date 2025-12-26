@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import developerImg from "../assets/developerImg.jpg";
+import developerImg from "../assets/developerImg.png";
 
 export default function Hero() {
   return (
@@ -15,7 +15,7 @@ export default function Hero() {
             w-[55vw]
             object-cover
             object-center
-            opacity-65
+            opacity-100
             grayscale
           "
         />
