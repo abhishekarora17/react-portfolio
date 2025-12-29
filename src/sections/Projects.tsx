@@ -66,7 +66,7 @@ export default function Projects() {
       </div>
 
       {/* ===================== CONTENT ===================== */}
-      <div className="relative px-12 md:px-24 max-w-7xl mx-auto z-10">
+      <div className="relative z-10 min-h-screen flex flex-col justify-center px-12 md:px-24">
         {/* Section Header */}
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
