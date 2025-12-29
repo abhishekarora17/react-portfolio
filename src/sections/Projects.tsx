@@ -2,40 +2,40 @@ import { motion } from "framer-motion";
 
 const projects = [
   {
-    title: "High-Scale Ticketing Platform",
+    title: "Hospital Management System (HMS)",
     description:
-      "Built a scalable backend system handling real-time pricing, commissions, and reseller workflows.",
+      "Built a scalable backend system handling real-time medicine stock and patient records.",
     highlights: [
-      "Handled 100k+ daily transactions",
+      "Handled 100k+ daily patient records",
       "Optimized pricing queries by 40%",
       "Multi-role access control",
     ],
-    tech: ["Node.js", "PostgreSQL", "Sequelize", "Redis"],
+    tech: ['Laravel', 'MySQL', 'CodeIgnitor'],
   },
   {
-    title: "Attendance & Payroll Engine",
+    title: "Flash: Learning App",
     description:
-      "Designed a rule-based attendance and salary computation engine for enterprise use.",
-    highlights: [
-      "Automated salary calculations",
-      "Reduced payroll errors significantly",
-      "Configurable attendance rules",
-    ],
-    tech: ["NestJS", "MySQL", "Cron Jobs"],
-  },
-  {
-    title: "SaaS-Ready API Platform",
-    description:
-      "Developed a modular API architecture ready for multi-tenant SaaS products.",
+      "Designed a role based learning platform for kids to study online and track their progress.",
     highlights: [
       "JWT + Role-based access",
       "API versioning",
       "Clean service-repository pattern",
     ],
-    tech: ["Laravel", "REST APIs", "Docker"],
+    tech: ["NestJS", "PostgresSQL", "Cron Jobs", "GraphQL"],
   },
   {
-    title: "Analytics & Reporting Engine",
+    title: "Project: Touchtight",
+    description:
+      "Developed a modular API architecture ready for soccer leagues and tournaments.",
+    highlights: [
+      "JWT + Role-based access",
+      "API versioning",
+      "Clean service-repository pattern",
+    ],
+    tech: ["Node.js", "Graphql", "SQL"],
+  },
+  {
+    title: "Prioticket",
     description:
       "Built data-heavy reporting pipelines with optimized queries and role-based dashboards.",
     highlights: [
@@ -43,7 +43,7 @@ const projects = [
       "Optimized query performance",
       "Export-ready reports",
     ],
-    tech: ["BigQuery", "SQL", "Node.js"],
+    tech: ["BigQuery", "SQL", "CodeIgnitor"],
   },
 ];
 
