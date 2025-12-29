@@ -37,7 +37,7 @@ const projects = [
   {
     title: "Prioticket",
     description:
-      "Built data-heavy reporting pipelines with optimized queries and role-based dashboards.",
+      "Built data-driven ticketing system with optimized queries",
     highlights: [
       "Large dataset handling",
       "Optimized query performance",
