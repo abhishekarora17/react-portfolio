@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
-import RightNav from "./RightNav";
-// import CodeCursorTrail from "../sections/CodeCursorTrail";
+import TopNav from "./TopNav";
 
 
 interface LayoutProps {
@@ -14,7 +13,7 @@ export default function Layout({ children }: Readonly<LayoutProps>) {
       {/* <CodeCursorTrail /> */}
 
       {/* Right-side navigation */}
-      <RightNav />
+      <TopNav />
 
       {/* Main content */}
       <main className="w-full">{children}</main>
