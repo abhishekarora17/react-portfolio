@@ -66,12 +66,12 @@ export default function WhatIDo() {
         <div className="absolute left-1/3 top-1/2 w-[500px] h-[500px] -translate-y-1/2 bg-cyan-500/8 rounded-full blur-[260px]" />
       </div>
 
-      <div className="relative px-12 md:px-24 max-w-6xl mx-auto z-10">
+      <div className="relative px-12 md:px-24 max-w-6xl z-10">
         <h2 className="text-3xl md:text-4xl font-bold mb-14">
           What I Do
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-[350px_1fr] gap-16">
           {/* ================= LEFT STEPS ================= */}
           <div className="relative">
             {/* Subtle base guide (optional, very light) */}
