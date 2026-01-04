@@ -12,13 +12,14 @@ export default function Hero() {
           className="
             absolute top-0 right-0
             h-full
-            w-[55vw]
+            w-full md:w-[55vw]
             object-cover
-            object-center
+            object-center md:object-right
             opacity-100
             grayscale
           "
         />
+
 
         {/* Dark base */}
         <div className="absolute inset-0 bg-black/75" />

@@ -44,7 +44,7 @@ export default function WhatIDo() {
 
   const active = capabilities[activeIndex];
 
-  // Measure tallest content once
+  // Measure tallest content once (prevents layout jump)
   useEffect(() => {
     if (!measureRef.current) return;
 
@@ -57,24 +57,57 @@ export default function WhatIDo() {
   }, []);
 
   return (
-    <section
-      id="about"
-      className="relative w-full py-20 overflow-hidden"
-    >
-      {/* ================= AMBIENT SECTION LIGHT ================= */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute left-1/3 top-1/2 w-[500px] h-[500px] -translate-y-1/2 bg-cyan-500/8 rounded-full blur-[260px]" />
-      </div>
+  <section
+    id="what-i-do"
+    className="relative w-full min-h-screen overflow-hidden"
+  >
+    {/* ================= AMBIENT SECTION LIGHT ================= */}
+    <div className="absolute inset-0 pointer-events-none">
+      {/* Primary ambient */}
+      <div
+        className="
+          absolute left-1/3 top-1/2
+          w-[520px] h-[420px]
+          -translate-y-1/2 -translate-x-1/2
+          bg-cyan-500/10
+          rounded-full
+          blur-[260px]
+        "
+      />
 
-      <div className="relative px-12 md:px-24 max-w-6xl z-10">
-        <h2 className="text-3xl md:text-4xl font-bold mb-14">
+      {/* Secondary soft ambient */}
+      <div
+        className="
+          absolute right-1/4 bottom-1/3
+          w-[600px] h-[480px]
+          bg-blue-500/6
+          rounded-full
+          blur-[300px]
+        "
+      />
+
+      {/* Subtle gradient wash */}
+      <div
+        className="
+          absolute inset-0
+          bg-gradient-to-br
+          from-transparent
+          via-blue-900/10
+          to-transparent
+        "
+      />
+    </div>
+
+    {/* ================= CENTERED CONTENT ================= */}
+    <div className="relative z-10 min-h-screen flex flex-col justify-center px-6 md:px-12">
+      <div className="w-full max-w-6xl mx-auto">
+        <h2 className="text-3xl md:text-4xl font-bold mb-12">
           What I Do
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-[350px_1fr] gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-[320px_1fr] gap-16">
           {/* ================= LEFT STEPS ================= */}
           <div className="relative">
-            {/* Subtle base guide (optional, very light) */}
             <div className="absolute left-[18px] top-0 h-full w-px bg-white/8" />
 
             <div className="space-y-8">
@@ -87,11 +120,10 @@ export default function WhatIDo() {
                     onClick={() => setActiveIndex(index)}
                     className="group w-full text-left"
                   >
-                    <div className="flex items-center gap-5">
-                      {/* Step number */}
+                    <div className="flex items-center gap-6">
                       <div
                         className={`
-                          w-9 h-9 flex items-center justify-center
+                          w-10 h-10 flex items-center justify-center
                           rounded-full text-xs font-mono
                           transition
                           ${
@@ -148,27 +180,8 @@ export default function WhatIDo() {
             </AnimatePresence>
           </div>
         </div>
-
-        {/* ================= HIDDEN MEASUREMENT ================= */}
-        <div
-          ref={measureRef}
-          className="absolute opacity-0 pointer-events-none -z-10"
-        >
-          {capabilities.map((item) => (
-            <div key={item.id} className="max-w-xl">
-              <h3 className="text-2xl font-semibold mb-4">
-                {item.title}
-              </h3>
-              <p className="mb-6">{item.description}</p>
-              <ul>
-                {item.points.map((p) => (
-                  <li key={p}>{p}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
       </div>
-    </section>
+    </div>
+  </section>
   );
 }
