@@ -44,7 +44,7 @@ export default function WhatIDo() {
 
   const active = capabilities[activeIndex];
 
-  // Measure tallest content once (prevents layout jump)
+  // Lock panel height to tallest content
   useEffect(() => {
     if (!measureRef.current) return;
 
@@ -57,60 +57,49 @@ export default function WhatIDo() {
   }, []);
 
   return (
-  <section
-    id="what-i-do"
-    className="relative w-full min-h-screen overflow-hidden"
-  >
-    {/* ================= AMBIENT SECTION LIGHT ================= */}
-    <div className="absolute inset-0 pointer-events-none">
-      {/* Primary ambient */}
-      <div
-        className="
-          absolute left-1/3 top-1/2
-          w-[520px] h-[420px]
-          -translate-y-1/2 -translate-x-1/2
-          bg-cyan-500/10
-          rounded-full
-          blur-[260px]
-        "
-      />
+    <section
+      id="what-i-do"
+      className="relative min-h-[90vh] md:min-h-[unset] w-full pt-16 md:pt-24 pb-20 md:pb-12 overflow-hidden"
+    >
+      {/* ================= AMBIENT BACKGROUND ================= */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-20 left-1/4 w-[520px] h-[520px] bg-cyan-500/12 rounded-full blur-[240px]" />
+        <div className="absolute bottom-0 right-1/4 w-[620px] h-[300px] bg-blue-500/10 rounded-full blur-[280px]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-blue-900/10 to-transparent" />
+      </div>
 
-      {/* Secondary soft ambient */}
-      <div
-        className="
-          absolute right-1/4 bottom-1/3
-          w-[600px] h-[480px]
-          bg-blue-500/6
-          rounded-full
-          blur-[300px]
-        "
-      />
-
-      {/* Subtle gradient wash */}
-      <div
-        className="
-          absolute inset-0
-          bg-gradient-to-br
-          from-transparent
-          via-blue-900/10
-          to-transparent
-        "
-      />
-    </div>
-
-    {/* ================= CENTERED CONTENT ================= */}
-    <div className="relative z-10 min-h-screen flex flex-col justify-center px-6 md:px-12">
-      <div className="w-full max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12">
+      {/* ================= CONTENT ================= */}
+      <div className="relative z-10 px-12 md:px-24">
+        {/* Header */}
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-3xl md:text-4xl font-bold mb-14"
+        >
           What I Do
-        </h2>
+        </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-[320px_1fr] gap-16">
-          {/* ================= LEFT STEPS ================= */}
-          <div className="relative">
-            <div className="absolute left-[18px] top-0 h-full w-px bg-white/8" />
+        {/* ================= TWO COLUMN LAYOUT ================= */}
+        <div className="relative">
+          {/* Vertical ambient divider (desktop only) */}
+          <div
+            className="
+              pointer-events-none
+              absolute left-[260px] top-0
+              h-full w-px
+              bg-gradient-to-b
+              from-transparent
+              via-cyan-400/25
+              to-transparent
+              hidden md:block
+            "
+          />
 
-            <div className="space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-[260px_1fr] gap-20">
+            {/* ================= LEFT: STEP SELECTOR ================= */}
+            <div className="space-y-10">
               {capabilities.map((item, index) => {
                 const isActive = index === activeIndex;
 
@@ -128,7 +117,7 @@ export default function WhatIDo() {
                           transition
                           ${
                             isActive
-                              ? "bg-cyan-400/25 text-cyan-300 shadow-[0_0_10px_rgba(34,211,238,0.35)]"
+                              ? "bg-cyan-400/25 text-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.35)]"
                               : "bg-white/5 text-gray-400 group-hover:text-gray-200"
                           }
                         `}
@@ -148,40 +137,59 @@ export default function WhatIDo() {
                 );
               })}
             </div>
-          </div>
 
-          {/* ================= RIGHT PANEL (HEIGHT LOCKED) ================= */}
-          <div
-            className="relative"
-            style={{ minHeight: panelHeight ?? "auto" }}
-          >
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active.id}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.35 }}
+            {/* ================= RIGHT: DETAIL PANEL ================= */}
+            <div
+              className="relative"
+              style={{ minHeight: panelHeight ?? "auto" }}
+            >
+              {/* Hidden measure container */}
+              <div
+                ref={measureRef}
+                className="absolute invisible pointer-events-none"
               >
-                <h3 className="text-2xl font-semibold mb-4">
-                  {active.title}
-                </h3>
+                {capabilities.map((item) => (
+                  <div key={item.id}>
+                    <h3 className="text-2xl font-semibold mb-4">
+                      {item.title}
+                    </h3>
+                    <p className="mb-6">{item.description}</p>
+                    <ul>
+                      {item.points.map((p) => (
+                        <li key={p}>{p}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
 
-                <p className="text-gray-400 max-w-xl mb-6">
-                  {active.description}
-                </p>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={active.id}
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -14 }}
+                  transition={{ duration: 0.35 }}
+                >
+                  <h3 className="text-2xl font-semibold mb-4">
+                    {active.title}
+                  </h3>
 
-                <ul className="space-y-2 text-sm text-gray-300">
-                  {active.points.map((p) => (
-                    <li key={p}>— {p}</li>
-                  ))}
-                </ul>
-              </motion.div>
-            </AnimatePresence>
+                  <p className="text-gray-400 max-w-xl mb-6">
+                    {active.description}
+                  </p>
+
+                  <ul className="space-y-2 text-sm text-gray-300">
+                    {active.points.map((p) => (
+                      <li key={p}>— {p}</li>
+                    ))}
+                  </ul>
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
   );
 }

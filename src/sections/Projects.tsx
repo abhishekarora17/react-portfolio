@@ -75,7 +75,7 @@ export default function Projects() {
           transition={{ duration: 0.6 }}
           className="text-3xl md:text-4xl font-bold mb-20"
         >
-          Selected Work
+          Works I Have Done
         </motion.h2>
 
         {/* ===================== GRID WRAPPER ===================== */}

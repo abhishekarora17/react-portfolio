@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import logo from "../assets/logo.png";
 
 const sections = [
   { id: "home", label: "HOME" },
@@ -14,21 +15,24 @@ export default function TopNav() {
   const navRef = useRef<HTMLUListElement>(null);
   const indicatorRef = useRef<HTMLDivElement>(null);
 
-  // ===== Accurate active section tracking =====
+  /* ---------- SCROLL SPY ---------- */
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        const visible = entries.filter((e) => e.isIntersecting);
+        if (!visible.length) return;
 
-        if (visible?.target?.id) {
-          setActive(visible.target.id);
-        }
+        const topMost = visible.reduce((prev, curr) =>
+          prev.boundingClientRect.top < curr.boundingClientRect.top
+            ? prev
+            : curr
+        );
+
+        setActive(topMost.target.id);
       },
       {
-        rootMargin: "-40% 0px -40% 0px",
-        threshold: [0.25, 0.5, 0.75],
+        rootMargin: "-50% 0px -50% 0px",
+        threshold: 0,
       }
     );
 
@@ -40,12 +44,13 @@ export default function TopNav() {
     return () => observer.disconnect();
   }, []);
 
-  // ===== Desktop underline sync =====
+  /* ---------- ACTIVE INDICATOR ---------- */
   useEffect(() => {
     if (!navRef.current || !indicatorRef.current) return;
 
     const index = sections.findIndex((s) => s.id === active);
-    const item = navRef.current.children[index] as HTMLElement;
+    const item = navRef.current.children[index + 1] as HTMLElement;
+    // +1 because motion.div is first child
 
     if (!item) return;
 
@@ -54,55 +59,75 @@ export default function TopNav() {
   }, [active]);
 
   return (
-    <header
-      className="
-        fixed top-0 left-0 right-0
-        z-50
-        backdrop-blur-md
-        bg-gradient-to-r
-        from-black/100
-        via-blue-950/40
-        to-black/100
-        border-b border-white/10
+    <header className="fixed top-0 left-0 right-0 z-50 overflow-hidden">
+      {/* ===== BLUE AMBIENT BACKGROUND ===== */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Soft cyan glow */}
+        <div
+          className="
+        absolute left-1/4 top-1/2
+        w-[420px] h-[420px]
+        -translate-y-1/2
+        bg-cyan-500/20
+        rounded-full
+        blur-[200px]
       "
-    >
-      <nav className="max-w-7xl px-20 md:px-24 h-16 flex items-center justify-between">
+        />
+
+        {/* Subtle gradient wash */}
+        <div
+          className="
+        absolute inset-0
+        bg-gradient-to-r
+        from-black/90
+        via-blue-950/40
+        to-black/90
+      "
+        />
+      </div>
+
+      {/* ===== NAV CONTENT ===== */}
+      <nav className="relative max-w-7xl mx-8 px-20 h-16 flex items-center justify-between backdrop-blur-md border-b border-white/10">
         {/* LOGO */}
         <button
-          onClick={() =>
-            document
-              .getElementById("home")
-              ?.scrollIntoView({ behavior: "smooth" })
-          }
-          className="text-lg font-semibold tracking-wide text-white hover:text-cyan-400 transition"
+          onClick={() => {
+            setActive("home");
+            document.getElementById("home")?.scrollIntoView({ behavior: "smooth" });
+          }}
+          className="
+            flex items-center justify-between pt-3
+            text-white hover:text-cyan-800
+            transition
+          "
         >
-          Abhishek
+          <img
+            src={logo}
+            alt="Abhishek Logo"
+            className="w-24 h-24 object-contain"
+          />
         </button>
 
-        {/* DESKTOP NAV ONLY */}
+        {/* NAV */}
         <ul
           ref={navRef}
-          className="relative hidden md:flex gap-10 text-sm tracking-widest left-20 right-0"
+          className="relative hidden ml-20 md:flex gap-10 h-full items-center text-sm tracking-widest"
         >
           {/* ACTIVE BAR */}
           <motion.div
             ref={indicatorRef}
-            className="
-              absolute -bottom-1 h-[2px]
-              bg-cyan-400
-              shadow-[0_0_12px_rgba(34,211,238,0.6)]
-            "
+            className="absolute bottom-0 h-[2px] bg-cyan-400 shadow-[0_0_12px_rgba(34,211,238,0.6)]"
             transition={{ type: "spring", stiffness: 260, damping: 30 }}
           />
 
           {sections.map((section) => (
             <li key={section.id}>
               <button
-                onClick={() =>
+                onClick={() => {
+                  setActive(section.id);
                   document
                     .getElementById(section.id)
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
                 className={`py-2 transition-colors ${
                   active === section.id
                     ? "text-cyan-400"
