@@ -59,7 +59,7 @@ export default function WhatIDo() {
   return (
     <section
       id="what-i-do"
-      className="relative min-h-[90vh] md:min-h-[unset] w-full pt-16 md:pt-24 pb-20 md:pb-12 overflow-hidden"
+      className="relative min-h-[90vh] md:min-h-[unset] w-full pt-16 md:pt-24 pb-24 md:pb-24 overflow-hidden"
     >
       {/* ================= AMBIENT BACKGROUND ================= */}
       <div className="absolute inset-0 pointer-events-none">
