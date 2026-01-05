@@ -1,7 +1,35 @@
 import { motion } from "framer-motion";
 import { Send, Linkedin, Github, MessageCircle } from "lucide-react";
+import { useState } from "react";
 
 export default function Contact() {
+
+  const [form, setForm] = useState({ contact: "", email: "", message: "" });
+  const [loading, setLoading] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+      e.preventDefault();
+      setLoading(true);
+
+      try {
+        const res = await fetch("http://localhost:3000/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(form),
+        });
+
+        if (res.ok) {
+          setSent(true);
+          setForm({ contact: "", email: "", message: "" });
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+  };
+
   return (
     <section
       id="contact"
@@ -65,7 +93,7 @@ export default function Contact() {
             "
           >
             {/* TWO COLUMN FORM */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-10">
               {/* LEFT */}
               <div className="space-y-6">
                 <div>
@@ -86,6 +114,8 @@ export default function Contact() {
                       focus:outline-none
                       focus:border-cyan-400/50
                     "
+                    value={form.contact}
+                    onChange={(e) => setForm({ ...form, contact: e.target.value })}
                   />
                 </div>
 
@@ -107,6 +137,8 @@ export default function Contact() {
                       focus:outline-none
                       focus:border-cyan-400/50
                     "
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
                   />
                 </div>
               </div>
@@ -131,6 +163,8 @@ export default function Contact() {
                     focus:outline-none
                     focus:border-cyan-400/50
                   "
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
                 />
 
                 <button
@@ -147,23 +181,29 @@ export default function Contact() {
                     hover:bg-cyan-400/25
                     transition
                   "
+                  disabled={loading}
                 >
                   <Send className="w-4 h-4" />
-                  Send Message
+                  {loading ? "Sending..." : "Send Message"}
                 </button>
               </div>
             </div>
           </form>
+          {sent && (
+            <p className="mt-4 text-green-400 text-sm">
+              Message sent successfully. I’ll get back to you soon 🙂
+            </p>
+          )}
         </motion.div>
 
         {/* ================= CONNECT DIVIDER ================= */}
-<div className="mt-24 flex items-center gap-6 w-full">
-  <div className="flex-1 h-px bg-white/15" />
-  <span className="text-sm text-gray-400 tracking-widest whitespace-nowrap">
-    connect with me
-  </span>
-  <div className="flex-1 h-px bg-white/15" />
-</div>
+        <div className="mt-24 flex items-center gap-6 w-full">
+          <div className="flex-1 h-px bg-white/15" />
+          <span className="text-sm text-gray-400 tracking-widest whitespace-nowrap">
+            connect with me
+          </span>
+          <div className="flex-1 h-px bg-white/15" />
+        </div>
 
 
         {/* ================= SOCIAL LINKS ================= */}
