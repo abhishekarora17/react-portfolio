@@ -21,7 +21,7 @@ export default function Contact() {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:3000/api/contact", {
+      const res = await fetch("http://localhost:3004/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,7 +31,7 @@ export default function Contact() {
 
       if (res.ok) {
         setSent(true);
-        setForm({ contact: "", email: "", message: "" });
+        setForm({ name: "", contact: "", email: "", message: "" });
       }
     } catch (error) {
       console.error("Form submit error:", error);
