@@ -1,34 +1,51 @@
 import { motion } from "framer-motion";
 import { Send, Linkedin, Github, MessageCircle } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Contact() {
+  const [form, setForm] = useState({
+    name: "",
+    contact: "",
+    email: "",
+    message: "",
+  });
 
-  const [form, setForm] = useState({ contact: "", email: "", message: "" });
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-      e.preventDefault();
-      setLoading(true);
+    e.preventDefault();
 
-      try {
-        const res = await fetch("http://localhost:3000/api/contact", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(form),
-        });
+    if (!form.email || !form.message) return;
 
-        if (res.ok) {
-          setSent(true);
-          setForm({ contact: "", email: "", message: "" });
-        }
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
+    setLoading(true);
+
+    try {
+      const res = await fetch("http://localhost:3000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      if (res.ok) {
+        setSent(true);
+        setForm({ contact: "", email: "", message: "" });
       }
+    } catch (error) {
+      console.error("Form submit error:", error);
+    } finally {
+      setLoading(false);
+    }
   };
+
+  useEffect(() => {
+    if (sent) {
+      const t = setTimeout(() => setSent(false), 4000);
+      return () => clearTimeout(t);
+    }
+  }, [sent]);
 
   return (
     <section
@@ -37,19 +54,14 @@ export default function Contact() {
     >
       {/* ================= AMBIENT BACKGROUND ================= */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Top-left ambient */}
         <div className="absolute -top-40 left-1/4 w-[520px] h-[520px] bg-cyan-500/12 rounded-full blur-[240px]" />
-
-        {/* Bottom-right ambient */}
         <div className="absolute bottom-0 right-1/4 w-[620px] h-[620px] bg-blue-500/10 rounded-full blur-[280px]" />
-
-        {/* Soft wash */}
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-blue-900/10 to-transparent" />
       </div>
 
       {/* ================= CONTENT ================= */}
       <div className="relative z-10 min-h-screen flex flex-col justify-center px-12 md:px-24">
-        {/* Section Header */}
+        {/* Header */}
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -69,33 +81,30 @@ export default function Contact() {
           className="relative max-w-5xl mx-auto w-full"
         >
           {/* Ambient border */}
-          <div
-            className="
-              pointer-events-none
-              absolute -inset-1
-              rounded-2xl
-              bg-gradient-to-br
-              from-cyan-400/25
-              via-blue-500/10
-              to-transparent
-              blur-xl
-              opacity-70
-            "
-          />
+          <div className="pointer-events-none absolute -inset-1 rounded-2xl bg-gradient-to-br from-cyan-400/25 via-blue-500/10 to-transparent blur-xl opacity-70" />
 
           <form
-            className="
-              relative
-              rounded-2xl
-              bg-black/60
-              border border-white/10
-              p-8
-            "
+            onSubmit={handleSubmit}
+            className="relative rounded-2xl bg-black/60 border border-white/10 p-8"
           >
-            {/* TWO COLUMN FORM */}
-            <div onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
               {/* LEFT */}
               <div className="space-y-6">
+                <div>
+                  <label className="block text-sm text-gray-400 mb-2">
+                    Your Name
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Your name here"
+                    value={form.name}
+                    onChange={(e) =>
+                      setForm({ ...form, name: e.target.value })
+                    }
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-gray-200 placeholder-gray-500 focus:outline-none focus:border-cyan-400/50"
+                  />
+                </div>
+
                 <div>
                   <label className="block text-sm text-gray-400 mb-2">
                     Your Contact Address
@@ -103,19 +112,11 @@ export default function Contact() {
                   <input
                     type="text"
                     placeholder="Company / Location / Phone"
-                    className="
-                      w-full
-                      bg-white/5
-                      border border-white/10
-                      rounded-lg
-                      px-4 py-3
-                      text-gray-200
-                      placeholder-gray-500
-                      focus:outline-none
-                      focus:border-cyan-400/50
-                    "
                     value={form.contact}
-                    onChange={(e) => setForm({ ...form, contact: e.target.value })}
+                    onChange={(e) =>
+                      setForm({ ...form, contact: e.target.value })
+                    }
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-gray-200 placeholder-gray-500 focus:outline-none focus:border-cyan-400/50"
                   />
                 </div>
 
@@ -126,19 +127,12 @@ export default function Contact() {
                   <input
                     type="email"
                     placeholder="you@example.com"
-                    className="
-                      w-full
-                      bg-white/5
-                      border border-white/10
-                      rounded-lg
-                      px-4 py-3
-                      text-gray-200
-                      placeholder-gray-500
-                      focus:outline-none
-                      focus:border-cyan-400/50
-                    "
                     value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    onChange={(e) =>
+                      setForm({ ...form, email: e.target.value })
+                    }
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-gray-200 placeholder-gray-500 focus:outline-none focus:border-cyan-400/50"
+                    required
                   />
                 </div>
               </div>
@@ -151,49 +145,31 @@ export default function Contact() {
                 <textarea
                   rows={6}
                   placeholder="Tell me briefly what you’d like to discuss..."
-                  className="
-                    w-full flex-1
-                    bg-white/5
-                    border border-white/10
-                    rounded-lg
-                    px-4 py-3
-                    text-gray-200
-                    placeholder-gray-500
-                    resize-none
-                    focus:outline-none
-                    focus:border-cyan-400/50
-                  "
                   value={form.message}
-                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  onChange={(e) =>
+                    setForm({ ...form, message: e.target.value })
+                  }
+                  className="w-full flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-gray-200 placeholder-gray-500 resize-none focus:outline-none focus:border-cyan-400/50"
+                  required
                 />
 
                 <button
                   type="submit"
-                  className="
-                    mt-6
-                    inline-flex items-center gap-2
-                    self-start
-                    px-6 py-3
-                    rounded-lg
-                    bg-cyan-400/15
-                    text-cyan-300
-                    border border-cyan-400/20
-                    hover:bg-cyan-400/25
-                    transition
-                  "
                   disabled={loading}
+                  className="mt-6 inline-flex items-center gap-2 self-start px-6 py-3 rounded-lg bg-cyan-400/15 text-cyan-300 border border-cyan-400/20 hover:bg-cyan-400/25 transition disabled:opacity-50"
                 >
                   <Send className="w-4 h-4" />
                   {loading ? "Sending..." : "Send Message"}
                 </button>
+
+                {sent && (
+                  <p className="mt-4 text-green-400 text-sm">
+                    Message sent successfully. I’ll get back to you soon 🙂
+                  </p>
+                )}
               </div>
             </div>
           </form>
-          {sent && (
-            <p className="mt-4 text-green-400 text-sm">
-              Message sent successfully. I’ll get back to you soon 🙂
-            </p>
-          )}
         </motion.div>
 
         {/* ================= CONNECT DIVIDER ================= */}
@@ -204,7 +180,6 @@ export default function Contact() {
           </span>
           <div className="flex-1 h-px bg-white/15" />
         </div>
-
 
         {/* ================= SOCIAL LINKS ================= */}
         <div className="mt-10 mx-auto flex items-center gap-10">
