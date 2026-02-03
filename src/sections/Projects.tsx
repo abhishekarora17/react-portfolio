@@ -144,9 +144,9 @@ export default function Projects() {
                     ))}
                   </div>
 
-                  <button className="text-sm text-cyan-400 hover:underline">
+                  {/* <button className="text-sm text-cyan-400 hover:underline">
                     View Details →
-                  </button>
+                  </button> */}
                 </div>
               </motion.div>
             ))}

@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 export default function AboutMe() {
+  const navigate = useNavigate();
   return (
     <section
       id="about-me"
@@ -107,6 +109,21 @@ export default function AboutMe() {
                 </p>
               </div>
             </motion.div>
+
+            <button
+              onClick={() => navigate("/about")}
+              className="
+                mt-20
+                border border-cyan-400/30
+                text-cyan-400
+                px-3 py-3
+                rounded-md
+                hover:bg-cyan-400/10
+                transition
+              "
+            >
+              Read more about me →
+            </button>
           </div>
         </div>
       </div>
