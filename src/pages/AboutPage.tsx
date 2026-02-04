@@ -1,6 +1,6 @@
 import { Github, Linkedin, MessageCircle } from "lucide-react";
 import { useState } from "react";
-import profile from "../assets/profile.avif";
+import profile from "../assets/profile.jpeg";
 
 export default function AboutPage() {
     const [activeTab, setActiveTab] = useState<"about" | "resume">("about");
@@ -83,7 +83,7 @@ export default function AboutPage() {
                                     <img
                                         src={profile}
                                         alt="Abhishek Arora"
-                                        className="w-full h-full object-cover grayscale"
+                                        className="w-full h-full object-cover"
                                     />
                                 </div>
                             </div>
