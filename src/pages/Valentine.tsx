@@ -10,7 +10,7 @@ import KissDayGame from "../components/valentine/KissDayGame";
 import ValentineFinal from "../components/valentine/ValentineFinal";
 import FloatingHearts from "../components/valentine/FloatingHearts";
 
-type Day = {
+type ValentineDay = {
   key: string;
   date: string;
   fullDate: string;
@@ -152,7 +152,7 @@ export default function Valentine() {
       </div>
 
       <p className="mt-10 text-sm text-rose-700">
-        Made with ❤️ by Abhishek
+        Made with ❤️ by Someone who cares about you.
       </p>
     </section>
   );
