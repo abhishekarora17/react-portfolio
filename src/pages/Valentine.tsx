@@ -1,12 +1,21 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import RoseDayGame from "../components/valentine/RoseDayGame";
+import ProposeDayGame from "../components/valentine/ProposeDayGame";
+import ChocolateDayGame from "../components/valentine/ChocolateDayGame";
+import TeddyDayGame from "../components/valentine/TeddyDayGame";
+import PromiseDayGame from "../components/valentine/PromiseDayGame";
+import HugDayGame from "../components/valentine/HugDayGame";
+import KissDayGame from "../components/valentine/KissDayGame";
+import ValentineFinal from "../components/valentine/ValentineFinal";
+import FloatingHearts from "../components/valentine/FloatingHearts";
 
-type ValentineDay = {
+type Day = {
   key: string;
   date: string;
   fullDate: string;
   title: string;
-  wish: string;
+  quote: string;
 };
 
 const days: ValentineDay[] = [
@@ -15,7 +24,7 @@ const days: ValentineDay[] = [
     date: "Feb 7",
     fullDate: "Feb 7",
     title: "🌹 Rose Day",
-    wish:
+    quote:
       "Like a rose, you make everything around you more beautiful— and somehow, life smells better when you’re around."
   },
   {
@@ -23,7 +32,7 @@ const days: ValentineDay[] = [
     date: "Feb 8",
     fullDate: "Feb 8",
     title: "💍 Propose Day",
-    wish:
+    quote:
       "If hearts could code, mine would always compile with yours— no errors, just endless possibilities."
   },
   {
@@ -31,7 +40,7 @@ const days: ValentineDay[] = [
     date: "Feb 9",
     fullDate: "Feb 9",
     title: "🍫 Chocolate Day",
-    wish:
+    quote:
       "Life’s sweeter with you in it. Not because it’s perfect—but because it’s warm and real."
   },
   {
@@ -39,7 +48,7 @@ const days: ValentineDay[] = [
     date: "Feb 10",
     fullDate: "Feb 10",
     title: "🧸 Teddy Day",
-    wish:
+    quote:
       "Whenever the world feels heavy, I hope you always find comfort—like a soft hug that never fades."
   },
   {
@@ -47,7 +56,7 @@ const days: ValentineDay[] = [
     date: "Feb 11",
     fullDate: "Feb 11",
     title: "🤝 Promise Day",
-    wish:
+    quote:
       "I promise to be there—not just on good days, but on the quiet, messy, human ones too."
   },
   {
@@ -55,7 +64,7 @@ const days: ValentineDay[] = [
     date: "Feb 12",
     fullDate: "Feb 12",
     title: "🤗 Hug Day",
-    wish:
+    quote:
       "Some hugs don’t need arms— they just need understanding. This one’s for you."
   },
   {
@@ -63,7 +72,7 @@ const days: ValentineDay[] = [
     date: "Feb 13",
     fullDate: "Feb 13",
     title: "💋 Kiss Day",
-    wish:
+    quote:
       "If emotions could speak, they’d say what a kiss tries to—without words."
   },
   {
@@ -71,111 +80,80 @@ const days: ValentineDay[] = [
     date: "Feb 14",
     fullDate: "Feb 14",
     title: "❤️ Valentine’s Day",
-    wish:
+    quote:
       "This isn’t about one day. It’s about every moment that feels warmer just because you exist."
   }
 ];
 
-const isUnlocked = (dayDate: string): boolean => {
+const isUnlocked = (d: string) => {
   const today = new Date();
   const year = today.getFullYear();
-  const date = new Date(`${dayDate} ${year}`);
-  return today >= date;
+  return today >= new Date(`${d} ${year}`);
 };
 
-const Valentine = (): JSX.Element => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [active, setActive] = useState<ValentineDay>(days[0]);
+export default function Valentine() {
+  const [params, setParams] = useSearchParams();
+  const [active, setActive] = useState(days[0]);
 
-  // Read ?day=rose from URL
   useEffect(() => {
-    const dayKey = searchParams.get("day");
-    if (!dayKey) return;
+    const k = params.get("day");
+    const found = days.find(d => d.key === k);
+    if (found && isUnlocked(found.fullDate)) setActive(found);
+  }, [params]);
 
-    const found = days.find(d => d.key === dayKey);
-    if (found && isUnlocked(found.fullDate)) {
-      setActive(found);
+  const renderGame = () => {
+    switch (active.key) {
+      case "rose": return <RoseDayGame />;
+      case "propose": return <ProposeDayGame />;
+      case "chocolate": return <ChocolateDayGame />;
+      case "teddy": return <TeddyDayGame />;
+      case "promise": return <PromiseDayGame />;
+      case "hug": return <HugDayGame />;
+      case "kiss": return <KissDayGame />;
+      case "valentine": return <ValentineFinal />;
     }
-  }, [searchParams]);
-
-  const handleClick = (day: ValentineDay): void => {
-    setActive(day);
-    setSearchParams({ day: day.key });
   };
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-pink-200 via-pink-300 to-rose-200 flex flex-col items-center px-4 py-10">
+    <section className="min-h-screen bg-gradient-to-br from-pink-200 via-pink-300 to-rose-200 flex flex-col items-center py-10 px-4">
 
-      {/* Floating Hearts */}
-      <div className="fixed inset-0 pointer-events-none">
-        {Array.from({ length: 20 }).map((_, i) => (
-          <span
-            key={i}
-            className="absolute bottom-0 animate-float text-pink-400 opacity-70"
-            style={{
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 6}s`,
-              fontSize: `${Math.random() * 20 + 12}px`
-            }}
-          >
-            💖
-          </span>
-        ))}
-      </div>
-
-      {/* Heading */}
-      <h1 className="relative text-4xl md:text-5xl font-semibold text-rose-700 mb-8 z-10">
-        Valentine Days 💕
-      </h1>
-
+      <FloatingHearts />
       {/* Tabs */}
-      <div className="relative flex flex-wrap justify-center gap-2 mb-10 z-10">
-        {days.map(day => {
-          const unlocked = isUnlocked(day.fullDate);
-
+      <div className="flex flex-wrap gap-2 mb-10">
+        {days.map(d => {
+          const ok = isUnlocked(d.fullDate);
           return (
             <button
-              key={day.key}
-              disabled={!unlocked}
-              onClick={() => unlocked && handleClick(day)}
-              className={`px-4 py-2 rounded-full text-sm md:text-base transition-all duration-300
-                ${
-                  active.key === day.key
-                    ? "bg-rose-500 text-white shadow-lg scale-105"
-                    : unlocked
-                    ? "bg-white/70 text-rose-600 hover:bg-white"
-                    : "bg-white/40 text-gray-400 cursor-not-allowed"
-                }`}
+              key={d.key}
+              disabled={!ok}
+              onClick={() => {
+                setActive(d);
+                setParams({ day: d.key });
+              }}
+              className={`px-4 py-2 rounded-full ${
+                active.key === d.key
+                  ? "bg-rose-500 text-white"
+                  : ok
+                  ? "bg-white text-rose-600"
+                  : "bg-white/40 text-gray-400"
+              }`}
             >
-              {day.date} {!unlocked && "🔒"}
+              {d.date} {!ok && "🔒"}
             </button>
           );
         })}
       </div>
 
       {/* Card */}
-      <div className="relative max-w-2xl bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl p-8 text-center animate-fadeIn z-10">
-        <h2 className="text-3xl font-medium text-rose-600 mb-4">
-          {active.title}
-        </h2>
-
-        <p className="text-lg text-gray-700 leading-relaxed">
-          {active.wish}
-        </p>
-
-        {active.key === "valentine" && (
-          <div className="mt-6 text-rose-500 text-xl animate-pulse">
-            💓💓💓
-          </div>
-        )}
+      <div className="bg-white/80 backdrop-blur rounded-2xl shadow-xl max-w-xl w-full p-8 space-y-6 text-center animate-fadeIn">
+        <h2 className="text-3xl text-rose-600">{active.title}</h2>
+        <p className="italic text-rose-700">“{active.quote}”</p>
+        <div className="pt-4">{renderGame()}</div>
       </div>
 
-      {/* Footer */}
-      <p className="relative mt-10 text-sm text-rose-700 opacity-80 z-10">
-        Made with ❤️ by Abhi
+      <p className="mt-10 text-sm text-rose-700">
+        Made with ❤️ by Abhishek
       </p>
     </section>
   );
-};
-
-export default Valentine;
+}
