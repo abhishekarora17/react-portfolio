@@ -1,9 +1,10 @@
 import { Github, Linkedin, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import profile from "../assets/profile.jpeg";
+import resume from "../assets/resume.pdf";
 
 export default function AboutPage() {
-    const [activeTab, setActiveTab] = useState<"about" | "resume">("about");
+    const [activeTab, setActiveTab] = useState<"about" | "resume">("resume");
 
     return (
         <section className="relative min-h-screen w-full bg-black overflow-hidden">
@@ -134,42 +135,31 @@ export default function AboutPage() {
                 {activeTab === "resume" && (
                     <div className="flex justify-center">
                         <div
-                            className="
-                                w-full max-w-4xl
-                                border border-white/10
-                                rounded-xl
-                                overflow-hidden
-                                bg-[#05070b]
-                                shadow-[0_0_40px_rgba(34,211,238,0.15)]
-                            "
+                        className="
+                            w-full
+                            max-w-6xl
+                            border border-white/10
+                            rounded-xl
+                            bg-[#05070b]
+                            shadow-[0_0_40px_rgba(34,211,238,0.15)]
+                        "
                         >
-                            <iframe
-                                src="/resume.pdf"
-                                className="w-full h-[600px]"
-                            />
+                        <iframe
+                            src={resume}
+                            className="
+                            w-full
+                            h-[calc(200vh-160px)]
+                            border-none
+                            "
+                        />
 
-                            <div className="p-4 border-t border-white/10 flex justify-between items-center">
-                                <span className="text-sm text-gray-400">
-                                    Resume (PDF)
-                                </span>
-
-                                <a
-                                    href="/resume.pdf"
-                                    download
-                                    className="
-                                        inline-flex items-center gap-2
-                                        text-cyan-400
-                                        border border-cyan-400/30
-                                        px-4 py-2
-                                        rounded-md
-                                        hover:bg-cyan-400/10
-                                        transition
-                                    "
-                                >
-                                    Download
-                                </a>
-                            </div>
+                        <div className="p-4 border-t border-white/10 flex justify-between items-center">
+                            <span className="text-sm text-gray-400">
+                            Resume (PDF)
+                            </span>
                         </div>
+                        </div>
+
                     </div>
                 )}
             </div>

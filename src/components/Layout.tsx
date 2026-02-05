@@ -10,14 +10,19 @@ export default function Layout({ children }: Readonly<LayoutProps>) {
   const { pathname } = useLocation();
 
   const hideTopNav = pathname === "/valentine";
+  const noMainWrapper = pathname === "/about";
 
   return (
     <div className="relative min-h-screen bg-bg">
       {/* Top Navigation */}
       {!hideTopNav && <TopNav />}
 
-      {/* Main content */}
-      <main className="w-full">{children}</main>
+      {/* Page Content */}
+      {noMainWrapper ? (
+        children
+      ) : (
+        <main className="w-full pt-16">{children}</main>
+      )}
     </div>
   );
 }
