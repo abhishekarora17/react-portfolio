@@ -1,7 +1,7 @@
-import { Github, Linkedin, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import profile from "../assets/profile.jpeg";
 import resume from "../assets/resume.pdf";
+import Contacts from "../components/SocialLinks";
 
 export default function AboutPage() {
     const [activeTab, setActiveTab] = useState<"about" | "resume">("resume");
@@ -100,33 +100,8 @@ export default function AboutPage() {
                         </div>
 
                         {/* ================= SOCIAL LINKS ================= */}
-                        <div className="mx-auto flex items-center gap-10">
-                            <a
-                                href="https://www.linkedin.com/in/abhishek-arora-818942221"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:border-cyan-400/40 transition"
-                            >
-                                <Linkedin className="w-5 h-5 text-gray-400 group-hover:text-cyan-400 transition" />
-                            </a>
-
-                            <a
-                                href="https://wa.me/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:border-cyan-400/40 transition"
-                            >
-                                <MessageCircle className="w-5 h-5 text-gray-400 group-hover:text-cyan-400 transition" />
-                            </a>
-
-                            <a
-                                href="https://github.com/abhishekarora17"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:border-cyan-400/40 transition"
-                            >
-                                <Github className="w-5 h-5 text-gray-400 group-hover:text-cyan-400 transition" />
-                            </a>
+                        <div className="w-full flex justify-center">
+                            <Contacts />
                         </div>
                     </div>
                 )}
@@ -157,6 +132,21 @@ export default function AboutPage() {
                             <span className="text-sm text-gray-400">
                             Resume (PDF)
                             </span>
+                             <a
+                                    href="/resume.pdf"
+                                    download
+                                    className="
+                                        inline-flex items-center gap-2
+                                        text-cyan-400
+                                        border border-cyan-400/30
+                                        px-4 py-2
+                                        rounded-md
+                                        hover:bg-cyan-400/10
+                                        transition
+                                    "
+                                >
+                                Download
+                            </a>
                         </div>
                         </div>
 

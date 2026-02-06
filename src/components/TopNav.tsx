@@ -111,12 +111,16 @@ export default function TopNav() {
         {/* LOGO */}
         <button
           onClick={() => handleNavClick("home")}
-          className="flex items-center justify-center"
+           className="
+            absolute left-1/2 -translate-x-1/2
+            md:static md:translate-x-0
+            flex items-center justify-center
+          "
         >
           <img
             src={logo}
             alt="Abhishek Logo"
-            className="h-16 scale-110 md:scale-125"
+            className="h-16 scale-110 md:scale-125 align-middle"
           />
         </button>
         {/* NAV LINKS (DESKTOP) */}
