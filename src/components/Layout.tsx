@@ -21,7 +21,9 @@ export default function Layout({ children }: Readonly<LayoutProps>) {
       {noMainWrapper ? (
         children
       ) : (
-        <main className="w-full pt-16">{children}</main>
+        <main className={hideTopNav ? "pt-0" : "pt-16"}>
+          {children}
+        </main>
       )}
     </div>
   );
