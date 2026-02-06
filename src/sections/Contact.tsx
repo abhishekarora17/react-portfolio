@@ -193,7 +193,7 @@ export default function Contact() {
           </a>
 
           <a
-            href="https://wa.me/"
+            href="https://wa.me/917355874070?text=Hi%20Abhishek%20%F0%9F%91%8B%0AI%20came%20across%20your%20portfolio%20and%20would%20love%20to%20connect%20with%20you."
             target="_blank"
             rel="noopener noreferrer"
             className="group w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:border-cyan-400/40 transition"
