@@ -34,6 +34,8 @@ export default function RoseDayGame() {
         </button>
         <button
           onMouseEnter={moveNo}
+          onClick={moveNo}
+          onTouchStart={moveNo}
           style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }}
           className="px-6 py-2 bg-gray-200 rounded-full transition-all"
         >
