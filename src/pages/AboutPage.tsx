@@ -112,7 +112,7 @@ export default function AboutPage() {
                         <div
                         className="
                             w-full
-                            max-w-6xl
+                            max-w-5xl
                             border border-white/10
                             rounded-xl
                             bg-[#05070b]
@@ -123,7 +123,7 @@ export default function AboutPage() {
                             src={resume}
                             className="
                             w-full
-                            h-[calc(200vh-160px)]
+                            h-[calc(200vh-180px)]
                             border-none
                             "
                         />
@@ -132,7 +132,7 @@ export default function AboutPage() {
                             <span className="text-sm text-gray-400">
                             Resume (PDF)
                             </span>
-                             <a
+                             {/* <a
                                     href="/resume.pdf"
                                     download
                                     className="
@@ -146,7 +146,7 @@ export default function AboutPage() {
                                     "
                                 >
                                 Download
-                            </a>
+                            </a> */}
                         </div>
                         </div>
 
