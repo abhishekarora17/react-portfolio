@@ -132,7 +132,7 @@ const projects: Project[] = [
 ];
 
 /* ===================== COMPONENT ===================== */
-export default function Projects(): JSX.Element {
+export default function Projects() {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
 
   return (

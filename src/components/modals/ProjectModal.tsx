@@ -9,7 +9,7 @@ interface ProjectModalProps {
 export default function ProjectModal({
   project,
   onClose,
-}: Readonly<ProjectModalProps>): JSX.Element | null {
+}: Readonly<ProjectModalProps>) {
   if (!project) return null;
 
   return (
@@ -80,7 +80,7 @@ interface SectionProps {
   text: string;
 }
 
-function Section({ title, text }: SectionProps): JSX.Element {
+function Section({ title, text }: Readonly<SectionProps>) {
   return (
     <div className="mb-5">
       <h4 className="text-sm uppercase tracking-wide text-cyan-400 mb-1">
@@ -96,7 +96,7 @@ interface ListProps {
   items: string[];
 }
 
-function List({ title, items }: ListProps): JSX.Element {
+function List({ title, items }: Readonly<ListProps>) {
   return (
     <div className="mb-5">
       <h4 className="text-sm uppercase tracking-wide text-cyan-400 mb-1">

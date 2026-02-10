@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-export default function Footer(): JSX.Element {
+export default function Footer() {
   return (
     <footer className="relative w-full overflow-hidden">
       {/* ================= AMBIENT GLOW ================= */}

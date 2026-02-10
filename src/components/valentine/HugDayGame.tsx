@@ -2,7 +2,8 @@ import { useState, useRef } from "react";
 
 export default function HugDayGame() {
   const [hug, setHug] = useState(false);
-  const timerRef = useRef(null);
+
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const startHold = () => {
     timerRef.current = setTimeout(() => {
@@ -11,7 +12,10 @@ export default function HugDayGame() {
   };
 
   const endHold = () => {
-    clearTimeout(timerRef.current);
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
   };
 
   return (
@@ -19,10 +23,10 @@ export default function HugDayGame() {
       <p className="text-lg">Hold for a hug 🤗</p>
 
       <button
-        onMouseDown={startHold}     // desktop
+        onMouseDown={startHold}
         onMouseUp={endHold}
         onMouseLeave={endHold}
-        onTouchStart={startHold}   // mobile
+        onTouchStart={startHold}
         onTouchEnd={endHold}
         className="px-6 py-3 bg-rose-400 text-white rounded-full mt-4 active:scale-95 transition"
       >

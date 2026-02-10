@@ -1,15 +1,12 @@
 import { useState } from "react";
 
 export default function TeddyDayGame() {
-  const [found, setFound] = useState(false);
   const [message, setMessage] = useState("");
 
-  const handleClick = (emoji) => {
+  const handleClick = (emoji: string) => {
     if (emoji === "🧸") {
-      setFound(true);
       setMessage("That’s my way of holding you close 🤗");
     } else {
-      setFound(false);
       setMessage("Oops! That’s not the teddy 😄");
     }
   };
