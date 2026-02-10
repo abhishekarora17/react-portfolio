@@ -108,49 +108,55 @@ export default function AboutPage() {
 
                 {/* ================= RESUME TAB ================= */}
                 {activeTab === "resume" && (
-                    <div className="flex justify-center">
-                        <div
+                <div className="flex justify-center">
+                    <div
+                    className="
+                        w-full
+                        max-w-5xl
+                        border border-white/10
+                        rounded-xl
+                        bg-[#05070b]
+                        shadow-[0_0_40px_rgba(34,211,238,0.15)]
+                        overflow-hidden
+                    "
+                    >
+                    {/* ===== TOP BAR ===== */}
+                    <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
+                        <span className="text-sm text-gray-400 tracking-wide">
+                        Resume (PDF)
+                        </span>
+
+                        <a
+                        href={resume}
+                        download="Abhishek_Arora_Resume.pdf"
                         className="
-                            w-full
-                            max-w-5xl
-                            border border-white/10
-                            rounded-xl
-                            bg-[#05070b]
-                            shadow-[0_0_40px_rgba(34,211,238,0.15)]
+                            inline-flex items-center gap-2
+                            text-cyan-400
+                            border border-cyan-400/30
+                            px-4 py-2
+                            rounded-md
+                            hover:bg-cyan-400/10
+                            transition
+                            text-sm
                         "
                         >
-                        <iframe
-                            src={resume}
-                            className="
-                            w-full
-                            h-[calc(200vh-180px)]
-                            border-none
-                            "
-                        />
-
-                        <div className="p-4 border-t border-white/10 flex justify-between items-center">
-                            <span className="text-sm text-gray-400">
-                            Resume (PDF)
-                            </span>
-                             {/* <a
-                                    href="/resume.pdf"
-                                    download
-                                    className="
-                                        inline-flex items-center gap-2
-                                        text-cyan-400
-                                        border border-cyan-400/30
-                                        px-4 py-2
-                                        rounded-md
-                                        hover:bg-cyan-400/10
-                                        transition
-                                    "
-                                >
-                                Download
-                            </a> */}
-                        </div>
-                        </div>
-
+                        ⬇ Download
+                        </a>
                     </div>
+
+                    {/* ===== PDF VIEW ===== */}
+                    <iframe
+                        src={resume}
+                        className="
+                        w-full
+                        h-[70vh]
+                        md:h-[80vh]
+                        border-none
+                        "
+                        title="Resume PDF"
+                    />
+                    </div>
+                </div>
                 )}
             </div>
         </section>
