@@ -2,6 +2,7 @@ import { useState } from "react";
 import profile from "../assets/profile.jpeg";
 import resume from "../assets/resume.pdf";
 import Contacts from "../components/SocialLinks";
+import Footer from "../sections/Footer";
 
 export default function AboutPage() {
     const [activeTab, setActiveTab] = useState<"about" | "resume">("resume");
@@ -159,6 +160,7 @@ export default function AboutPage() {
                 </div>
                 )}
             </div>
+            <Footer />
         </section>
     );
 }
