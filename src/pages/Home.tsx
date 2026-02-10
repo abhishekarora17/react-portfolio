@@ -5,6 +5,7 @@ import WhatIDo from "../sections/WhatIDo";
 import Projects from "../sections/Projects";
 import AboutMe from "../sections/AboutMe";
 import Contact from "../sections/Contact";
+import Footer from "../sections/Footer";
 
 export default function Home() {
   const location = useLocation();
@@ -26,6 +27,7 @@ export default function Home() {
       <Projects />
       <AboutMe />
       <Contact />
+      <Footer />
     </>
   );
 }
