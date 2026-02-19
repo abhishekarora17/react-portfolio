@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 import ProjectModal from "../components/modals/ProjectModal";
 
 /* ===================== TYPES ===================== */
@@ -17,13 +17,14 @@ export interface Project {
   highlights: string[];
   tech: string[];
   details: ProjectDetails;
+  accent: string;
 }
 
 /* ===================== DATA ===================== */
 const projects: Project[] = [
   {
     id: "hms",
-    title: "Hospital Management System (HMS)",
+    title: "Hospital Management System",
     description:
       "Built a scalable backend system handling real-time medicine stock and patient records.",
     highlights: [
@@ -31,7 +32,8 @@ const projects: Project[] = [
       "Optimized pricing queries by 40%",
       "Multi-role access control",
     ],
-    tech: ["Laravel", "MySQL", "CodeIgnitor"],
+    tech: ["Laravel", "MySQL", "CodeIgniter"],
+    accent: "from-cyan-400/30 to-cyan-400/0",
     details: {
       problem:
         "Manual record handling and unoptimized queries caused delays and data inconsistency.",
@@ -59,6 +61,7 @@ const projects: Project[] = [
       "Clean service-repository pattern",
     ],
     tech: ["NestJS", "PostgreSQL", "Cron Jobs", "GraphQL"],
+    accent: "from-violet-500/30 to-violet-500/0",
     details: {
       problem:
         "Lack of centralized learning progress tracking for students and teachers.",
@@ -86,6 +89,7 @@ const projects: Project[] = [
       "Scalable tournament design",
     ],
     tech: ["Node.js", "GraphQL", "SQL"],
+    accent: "from-emerald-500/30 to-emerald-500/0",
     details: {
       problem:
         "Monolithic systems made league and tournament management hard to scale.",
@@ -112,10 +116,10 @@ const projects: Project[] = [
       "Optimized query performance",
       "Export-ready reports",
     ],
-    tech: ["BigQuery", "SQL", "CodeIgnitor"],
+    tech: ["BigQuery", "SQL", "CodeIgniter"],
+    accent: "from-orange-400/30 to-orange-400/0",
     details: {
-      problem:
-        "Slow analytics queries over massive ticketing datasets.",
+      problem: "Slow analytics queries over massive ticketing datasets.",
       solution:
         "Used BigQuery with optimized SQL for analytical workloads.",
       architecture: [
@@ -131,6 +135,80 @@ const projects: Project[] = [
   },
 ];
 
+/* ===================== TILT CARD ===================== */
+function TiltCard({ project, index, onClick }: { project: Project; index: number; onClick: () => void }) {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useTransform(y, [-80, 80], [6, -6]);
+  const rotateY = useTransform(x, [-80, 80], [-6, 6]);
+
+  const handleMouse = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    x.set(e.clientX - rect.left - rect.width / 2);
+    y.set(e.clientY - rect.top - rect.height / 2);
+  };
+
+  const resetTilt = () => { x.set(0); y.set(0); };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      style={{ rotateX, rotateY, transformPerspective: 800 }}
+      onMouseMove={handleMouse}
+      onMouseLeave={resetTilt}
+      onClick={onClick}
+      className="cursor-pointer group relative rounded-2xl border border-white/8 bg-gradient-to-br from-white/[0.04] to-white/[0.01] hover:border-white/20 transition-all duration-300 overflow-hidden"
+    >
+      {/* Glowing top border */}
+      <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${project.accent}`} />
+
+      {/* Number badge */}
+      <div className="absolute top-5 right-5 text-xs font-mono text-gray-600 group-hover:text-gray-400 transition">
+        {String(index + 1).padStart(2, "0")}
+      </div>
+
+      <div className="relative p-8 md:p-9">
+        <h3 className="text-lg font-semibold mb-3 pr-8 text-white group-hover:text-white transition">
+          {project.title}
+        </h3>
+
+        <p className="text-gray-400 mb-5 text-sm leading-relaxed">{project.description}</p>
+
+        <ul className="space-y-1.5 text-sm text-gray-300 mb-6">
+          {project.highlights.map((point) => (
+            <li key={point} className="flex items-start gap-2">
+              <span className="text-cyan-400 mt-0.5">›</span>
+              {point}
+            </li>
+          ))}
+        </ul>
+
+        <div className="flex flex-wrap gap-2">
+          {project.tech.map((t) => (
+            <span
+              key={t}
+              className="text-xs px-2.5 py-1 rounded-md bg-white/5 border border-white/8 text-gray-400"
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+
+        {/* View details hint */}
+        <p className="mt-5 text-xs text-cyan-400/0 group-hover:text-cyan-400/70 transition-all duration-300">
+          View details →
+        </p>
+      </div>
+
+      {/* Hover glow backdrop */}
+      <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-cyan-400/[0.04] to-transparent rounded-2xl" />
+    </motion.div>
+  );
+}
+
 /* ===================== COMPONENT ===================== */
 export default function Projects() {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
@@ -142,78 +220,32 @@ export default function Projects() {
     >
       {/* ===================== AMBIENT BACKGROUND ===================== */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute -top-40 -left-40 w-[520px] h-[520px] bg-cyan-500/20 rounded-full blur-[200px]" />
-        <div className="absolute top-1/3 -right-40 w-[620px] h-[620px] bg-blue-600/20 rounded-full blur-[220px]" />
-        <div className="absolute bottom-0 left-1/3 w-[420px] h-[420px] bg-cyan-400/15 rounded-full blur-[180px]" />
+        <div className="absolute -top-40 -left-40 w-[520px] h-[520px] bg-cyan-500/15 rounded-full blur-[200px]" />
+        <div className="absolute top-1/3 -right-40 w-[620px] h-[620px] bg-blue-600/15 rounded-full blur-[220px]" />
       </div>
 
       {/* ===================== CONTENT ===================== */}
-      <div className="relative z-10 min-h-screen flex flex-col justify-center px-12 md:px-24">
-        <motion.h2
+      <div className="relative z-10 px-8 md:px-24">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-3xl md:text-4xl font-bold mb-20"
+          className="mb-16"
         >
-          Works I Have Done
-        </motion.h2>
+          <p className="text-xs tracking-[0.3em] text-cyan-400 uppercase mb-3">Portfolio</p>
+          <h2 className="text-3xl md:text-4xl font-bold">Works I Have Done</h2>
+        </motion.div>
 
-        <div className="relative">
-          <div className="hidden md:block absolute left-1/2 top-0 h-full w-px bg-gradient-to-b from-transparent via-cyan-400/25 to-transparent" />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-14">
-              {projects.map((project, index) => (
-                <motion.div
-                  key={project.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.08 }}
-                  onClick={() => setActiveProject(project)}
-                  className="
-                    cursor-pointer
-                    relative
-                    rounded-2xl
-                    p-8 md:p-10
-                    border border-cyan-400/10
-                    bg-gradient-to-br
-                    from-white/5
-                    via-white/[0.03]
-                    to-cyan-400/5
-                    backdrop-blur-sm
-                  "
-                >
-                  <div className="pointer-events-none absolute -inset-px rounded-2xl bg-cyan-400/15 blur-3xl opacity-25" />
-
-                  <div className="relative">
-                    <h3 className="text-xl font-semibold mb-3">
-                      {project.title}
-                    </h3>
-
-                    <p className="text-gray-400 mb-5">
-                      {project.description}
-                    </p>
-
-                    <ul className="space-y-1 text-sm text-gray-300 mb-6">
-                      {project.highlights.map((point) => (
-                        <li key={point}>— {point}</li>
-                      ))}
-                    </ul>
-
-                    <div className="flex flex-wrap gap-2">
-                      {project.tech.map((t) => (
-                        <span
-                          key={t}
-                          className="text-xs px-3 py-1 rounded-full bg-cyan-400/10 text-cyan-300"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {projects.map((project, index) => (
+            <TiltCard
+              key={project.id}
+              project={project}
+              index={index}
+              onClick={() => setActiveProject(project)}
+            />
+          ))}
         </div>
       </div>
 
