@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Send } from "lucide-react";
 import { useState, useEffect } from "react";
-import Contacts from "../components/SocialLinks";
 
 export default function Contact() {
   const [form, setForm] = useState({
@@ -165,20 +164,6 @@ export default function Contact() {
             </div>
           </form>
         </motion.div>
-
-        {/* ================= CONNECT DIVIDER ================= */}
-        <div className="mt-20 flex items-center gap-6 w-full max-w-5xl mx-auto">
-          <div className="flex-1 h-px bg-white/10" />
-          <span className="text-xs text-gray-500 tracking-[0.25em] whitespace-nowrap">
-            CONNECT WITH ME
-          </span>
-          <div className="flex-1 h-px bg-white/10" />
-        </div>
-
-        {/* ================= SOCIAL LINKS ================= */}
-        <div className="mt-10 mx-auto flex items-center gap-10">
-          <Contacts />
-        </div>
       </div>
     </section>
   );

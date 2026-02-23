@@ -1,7 +1,6 @@
 import { useState } from "react";
 import profile from "../assets/profile.jpeg";
 import resume from "../assets/resume.pdf";
-import Contacts from "../components/SocialLinks";
 import Footer from "../sections/Footer";
 
 export default function AboutPage() {
@@ -89,20 +88,6 @@ export default function AboutPage() {
                                     />
                                 </div>
                             </div>
-                        </div>
-
-                        {/* ================= CONNECT DIVIDER ================= */}
-                        <div className="mt-24 flex items-center gap-6 w-full">
-                            <div className="flex-1 h-px bg-white/15" />
-                            <span className="text-sm text-gray-400 tracking-widest whitespace-nowrap">
-                                Connect With Me
-                            </span>
-                            <div className="flex-1 h-px bg-white/15" />
-                        </div>
-
-                        {/* ================= SOCIAL LINKS ================= */}
-                        <div className="w-full flex justify-center">
-                            <Contacts />
                         </div>
                     </div>
                 )}

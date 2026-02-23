@@ -6,6 +6,7 @@ import Projects from "../sections/Projects";
 import AboutMe from "../sections/AboutMe";
 import Contact from "../sections/Contact";
 import Footer from "../sections/Footer";
+import SectionAssistant from "../components/SectionAssistant";
 
 export default function Home() {
   const location = useLocation();
@@ -28,6 +29,7 @@ export default function Home() {
       <AboutMe />
       <Contact />
       <Footer />
+      <SectionAssistant />
     </>
   );
 }
