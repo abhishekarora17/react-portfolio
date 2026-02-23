@@ -15,7 +15,7 @@ export default function ProjectModal({
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-center justify-center px-6"
+        className="fixed inset-0 z-50 bg-black/55 backdrop-blur-md flex items-center justify-center px-6"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -33,8 +33,8 @@ export default function ProjectModal({
             rounded-2xl
             p-8
             bg-gradient-to-br
-            from-[#0b1220]
-            via-[#0b1220]/95
+            from-[var(--color-surface)]
+            via-[var(--color-surface-soft)]
             to-cyan-500/10
             border border-cyan-400/20
             overflow-y-auto
@@ -86,7 +86,7 @@ function Section({ title, text }: Readonly<SectionProps>) {
       <h4 className="text-sm uppercase tracking-wide text-cyan-400 mb-1">
         {title}
       </h4>
-      <p className="text-gray-300 text-sm">{text}</p>
+      <p className="text-soft text-sm">{text}</p>
     </div>
   );
 }
@@ -102,7 +102,7 @@ function List({ title, items }: Readonly<ListProps>) {
       <h4 className="text-sm uppercase tracking-wide text-cyan-400 mb-1">
         {title}
       </h4>
-      <ul className="list-disc list-inside text-gray-300 text-sm space-y-1">
+      <ul className="list-disc list-inside text-soft text-sm space-y-1">
         {items.map((item) => (
           <li key={item}>{item}</li>
         ))}

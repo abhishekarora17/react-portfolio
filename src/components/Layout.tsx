@@ -13,7 +13,7 @@ export default function Layout({ children }: Readonly<LayoutProps>) {
   const noMainWrapper = pathname === "/about";
 
   return (
-    <div className="relative min-h-screen bg-bg">
+    <div className="relative min-h-screen bg-app text-theme">
       {/* Top Navigation */}
       {!hideTopNav && <TopNav />}
 

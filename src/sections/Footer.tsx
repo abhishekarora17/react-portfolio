@@ -33,7 +33,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative w-full overflow-hidden border-t border-white/8">
+    <footer className="relative w-full overflow-hidden border-t border-theme">
       {/* Ambient glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[200px] bg-cyan-500/8 rounded-full blur-[140px]" />
@@ -50,21 +50,21 @@ export default function Footer() {
         >
           {/* Brand */}
           <div>
-            <h3 className="text-lg font-bold mb-2 text-white">Abhishek Arora</h3>
-            <p className="text-sm text-gray-500 leading-relaxed max-w-[200px]">
+            <h3 className="text-lg font-bold mb-2 text-theme">Abhishek Arora</h3>
+            <p className="text-sm text-muted leading-relaxed max-w-[200px]">
               Backend developer building scalable systems and APIs.
             </p>
           </div>
 
           {/* Nav Links */}
           <div>
-            <p className="text-xs tracking-[0.2em] text-gray-600 uppercase mb-4">Navigation</p>
+            <p className="text-xs tracking-[0.2em] text-faint uppercase mb-4">Navigation</p>
             <ul className="space-y-2.5">
               {navLinks.map((link) => (
                 <li key={link.id}>
                   <button
                     onClick={() => scrollTo(link.id)}
-                    className="text-sm text-gray-500 hover:text-cyan-400 transition"
+                    className="text-sm text-muted hover:text-cyan-400 transition"
                   >
                     {link.label}
                   </button>
@@ -75,7 +75,7 @@ export default function Footer() {
 
           {/* Social Icons */}
           <div>
-            <p className="text-xs tracking-[0.2em] text-gray-600 uppercase mb-4">Connect</p>
+            <p className="text-xs tracking-[0.2em] text-faint uppercase mb-4">Connect</p>
             <div className="flex items-center gap-3">
               {socials.map(({ href, icon: Icon, label }) => (
                 <a
@@ -84,7 +84,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-10 h-10 flex items-center justify-center rounded-full border border-white/10 text-gray-500 hover:border-cyan-400/40 hover:text-cyan-400 transition"
+                  className="w-10 h-10 flex items-center justify-center rounded-full border border-theme text-muted hover:border-cyan-400/40 hover:text-cyan-400 transition"
                 >
                   <Icon className="w-4 h-4" />
                 </a>
@@ -94,12 +94,12 @@ export default function Footer() {
         </motion.div>
 
         {/* Bottom bar */}
-        <div className="border-t border-white/8 pt-6 flex flex-col md:flex-row items-center justify-between gap-2">
-          <p className="text-xs text-gray-600">
+        <div className="border-t border-theme pt-6 flex flex-col md:flex-row items-center justify-between gap-2">
+          <p className="text-xs text-faint">
             © {new Date().getFullYear()}{" "}
-            <span className="text-gray-400 font-medium">Abhishek Arora</span>. All rights reserved.
+            <span className="text-soft font-medium">Abhishek Arora</span>. All rights reserved.
           </p>
-          <p className="text-xs text-gray-700">
+          <p className="text-xs text-faint">
             Built with React · TypeScript · Tailwind CSS
           </p>
         </div>

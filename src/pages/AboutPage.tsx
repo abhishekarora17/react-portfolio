@@ -8,7 +8,7 @@ export default function AboutPage() {
     const [activeTab, setActiveTab] = useState<"about" | "resume">("resume");
 
     return (
-        <section className="relative min-h-screen w-full bg-black overflow-hidden">
+        <section className="relative min-h-screen w-full bg-about overflow-hidden text-theme">
             {/* ================= AMBIENT BACKGROUND ================= */}
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute top-32 left-1/2 w-[800px] h-[520px] bg-cyan-500/10 rounded-full blur-[260px]" />
@@ -18,12 +18,12 @@ export default function AboutPage() {
             <div className="relative z-10 max-w-9xl mx-auto px-8 md:px-16 py-20">
 
                 {/* ================= FULL-WIDTH TABS ================= */}
-                <div className="flex w-full border border-white/10 rounded-lg overflow-hidden mb-20">
+                <div className="flex w-full border border-theme rounded-lg overflow-hidden mb-20">
                     <button
                         onClick={() => setActiveTab("about")}
                         className={`w-1/2 py-4 text-sm tracking-widest transition ${activeTab === "about"
                                 ? "bg-cyan-400/10 text-cyan-400"
-                                : "text-gray-400 hover:text-gray-200"
+                                : "text-soft hover:text-theme"
                             }`}
                     >
                         ABOUT
@@ -33,7 +33,7 @@ export default function AboutPage() {
                         onClick={() => setActiveTab("resume")}
                         className={`w-1/2 py-4 text-sm tracking-widest transition ${activeTab === "resume"
                                 ? "bg-cyan-400/10 text-cyan-400"
-                                : "text-gray-400 hover:text-gray-200"
+                                : "text-soft hover:text-theme"
                             }`}
                     >
                         RESUME
@@ -47,24 +47,24 @@ export default function AboutPage() {
                         {/* JOURNEY */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-16 items-start">
                             <div className="md:col-span-2">
-                                <p className="text-xl text-gray-200 mb-6">
+                                <p className="text-xl text-soft mb-6">
                                     ☕ <span className="text-cyan-400">Let us have a cup of tea together.</span>
                                 </p>
 
-                                <p className="text-gray-400 leading-relaxed mb-6">
+                                <p className="text-soft leading-relaxed mb-6">
                                     My journey into backend development started with curiosity —
                                     curiosity about how systems behave under the hood, how data
                                     flows, and how decisions made early can shape scalability
                                     years later.
                                 </p>
 
-                                <p className="text-gray-400 leading-relaxed mb-6">
+                                <p className="text-soft leading-relaxed mb-6">
                                     Over time, I gravitated toward designing APIs, structuring
                                     databases, and building backend services that prioritize
                                     reliability, maintainability, and clarity over shortcuts.
                                 </p>
 
-                                <p className="text-gray-400 leading-relaxed">
+                                <p className="text-soft leading-relaxed">
                                     I believe good engineering is quiet — systems that work,
                                     scale, and explain themselves through clean design.
                                 </p>
@@ -79,7 +79,7 @@ export default function AboutPage() {
                                         aspect-full
                                         rounded-xl
                                         overflow-hidden
-                                        border border-white/10
+                                        border border-theme
                                         shadow-[0_0_30px_rgba(34,211,238,0.15)]
                                     ">
                                     <img
@@ -93,11 +93,11 @@ export default function AboutPage() {
 
                         {/* ================= CONNECT DIVIDER ================= */}
                         <div className="mt-24 flex items-center gap-6 w-full">
-                            <div className="flex-1 h-px bg-white/15" />
-                            <span className="text-sm text-gray-400 tracking-widest whitespace-nowrap">
+                            <div className="flex-1 h-px border-t border-theme" />
+                            <span className="text-sm text-soft tracking-widest whitespace-nowrap">
                                 Connect With Me
                             </span>
-                            <div className="flex-1 h-px bg-white/15" />
+                            <div className="flex-1 h-px border-t border-theme" />
                         </div>
 
                         {/* ================= SOCIAL LINKS ================= */}
@@ -114,16 +114,16 @@ export default function AboutPage() {
                     className="
                         w-full
                         max-w-5xl
-                        border border-white/10
+                        border border-theme
                         rounded-xl
-                        bg-[#05070b]
+                        bg-surface
                         shadow-[0_0_40px_rgba(34,211,238,0.15)]
                         overflow-hidden
                     "
                     >
                     {/* ===== TOP BAR ===== */}
-                    <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
-                        <span className="text-sm text-gray-400 tracking-wide">
+                    <div className="flex items-center justify-between px-5 py-4 border-b border-theme">
+                        <span className="text-sm text-soft tracking-wide">
                         Resume (PDF)
                         </span>
 

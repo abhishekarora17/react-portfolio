@@ -51,8 +51,8 @@ export default function Hero() {
         />
 
         {/* Cinematic overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#050b18] via-[#050b18]/80 to-[#050b18]/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#050b18] via-transparent to-transparent" />
+        <div className="absolute inset-0 hero-overlay-x" />
+        <div className="absolute inset-0 hero-overlay-y" />
 
         {/* Ambient glow */}
         <div className="absolute top-1/2 left-1/3 w-[500px] h-[500px] -translate-x-1/2 -translate-y-1/2 bg-cyan-400/10 rounded-full blur-[220px] pointer-events-none" />
@@ -82,7 +82,7 @@ export default function Hero() {
         >
           Abhishek
           <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-text)] to-[var(--color-text-soft)]">
             Arora
           </span>
         </motion.h1>
@@ -103,7 +103,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7 }}
-          className="max-w-lg text-gray-400 leading-relaxed mb-10 text-base"
+          className="max-w-lg text-soft leading-relaxed mb-10 text-base"
         >
           I design scalable backend systems, APIs, and modern web products built
           for performance and growth.
@@ -126,7 +126,7 @@ export default function Hero() {
 
           <button
             onClick={() => scrollToSection("contact")}
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg border border-white/15 text-gray-300 text-sm font-medium hover:border-white/30 hover:text-white transition-all"
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg border border-theme text-soft text-sm font-medium hover:border-theme-strong hover:text-theme transition-all"
           >
             Get in Touch
           </button>
@@ -152,7 +152,7 @@ export default function Hero() {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 flex items-center justify-center rounded-full border border-white/10 text-gray-400 hover:border-cyan-400/50 hover:text-cyan-400 transition-all"
+              className="w-10 h-10 flex items-center justify-center rounded-full border border-theme text-soft hover:border-cyan-400/50 hover:text-cyan-400 transition-all"
             >
               <Icon className="w-4 h-4" />
             </a>

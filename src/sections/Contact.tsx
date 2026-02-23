@@ -86,7 +86,7 @@ export default function Contact() {
 
           <form
             onSubmit={handleSubmit}
-            className="relative rounded-2xl bg-black/50 border border-white/10 p-8"
+            className="relative rounded-2xl theme-card p-8"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* LEFT */}
@@ -168,11 +168,11 @@ export default function Contact() {
 
         {/* ================= CONNECT DIVIDER ================= */}
         <div className="mt-20 flex items-center gap-6 w-full max-w-5xl mx-auto">
-          <div className="flex-1 h-px bg-white/10" />
-          <span className="text-xs text-gray-500 tracking-[0.25em] whitespace-nowrap">
+          <div className="flex-1 h-px border-t border-theme" />
+          <span className="text-xs text-muted tracking-[0.25em] whitespace-nowrap">
             CONNECT WITH ME
           </span>
-          <div className="flex-1 h-px bg-white/10" />
+          <div className="flex-1 h-px border-t border-theme" />
         </div>
 
         {/* ================= SOCIAL LINKS ================= */}

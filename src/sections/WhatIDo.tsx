@@ -123,24 +123,24 @@ export default function WhatIDo() {
                     transition={{ type: "spring", stiffness: 400, damping: 25 }}
                     className={`group w-full text-left rounded-xl p-4 transition-all border ${isActive
                         ? "border-cyan-400/30 bg-cyan-400/5 shadow-[0_0_20px_rgba(34,211,238,0.08)]"
-                        : "border-transparent hover:border-white/10 hover:bg-white/[0.02]"
+                        : "border-transparent hover:border-theme hover:bg-surface"
                       }`}
                   >
                     <div className="flex items-center gap-4">
                       <div
-                        className={`w-10 h-10 flex items-center justify-center rounded-lg transition-all ${isActive
+                          className={`w-10 h-10 flex items-center justify-center rounded-lg transition-all ${isActive
                             ? "bg-cyan-400/20 text-cyan-300 shadow-[0_0_14px_rgba(34,211,238,0.3)]"
-                            : "bg-white/5 text-gray-500 group-hover:text-gray-300"
+                            : "bg-surface text-faint group-hover:text-soft"
                           }`}
                       >
                         <Icon className="w-4 h-4" />
                       </div>
 
                       <div>
-                        <span className={`block text-[10px] font-mono tracking-widest mb-0.5 ${isActive ? "text-cyan-400" : "text-gray-600"}`}>
+                        <span className={`block text-[10px] font-mono tracking-widest mb-0.5 ${isActive ? "text-cyan-400" : "text-faint"}`}>
                           {item.id}
                         </span>
-                        <span className={`font-medium text-sm transition ${isActive ? "text-white" : "text-gray-400"}`}>
+                        <span className={`font-medium text-sm transition ${isActive ? "text-theme" : "text-soft"}`}>
                           {item.title}
                         </span>
                       </div>
@@ -176,7 +176,7 @@ export default function WhatIDo() {
                 >
                   <h3 className="text-2xl md:text-3xl font-bold mb-4">{active.title}</h3>
 
-                  <p className="text-gray-400 max-w-xl mb-8 leading-relaxed">{active.description}</p>
+                  <p className="text-soft max-w-xl mb-8 leading-relaxed">{active.description}</p>
 
                   {/* Pill badges */}
                   <div className="flex flex-wrap gap-3">
@@ -192,7 +192,7 @@ export default function WhatIDo() {
                   </div>
 
                   {/* Auto-advance progress bar */}
-                  <div className="mt-10 h-px w-full bg-white/5 relative overflow-hidden rounded-full">
+                  <div className="mt-10 h-px w-full bg-surface relative overflow-hidden rounded-full">
                     <motion.div
                       key={activeIndex}
                       initial={{ width: "0%" }}

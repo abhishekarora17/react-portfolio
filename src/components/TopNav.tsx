@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
 import logo from "../assets/logo.png";
+import { useTheme } from "../hooks/useTheme";
 
 const sections = [
   { id: "home", label: "HOME" },
@@ -21,6 +22,7 @@ export default function TopNav() {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const { theme, toggleTheme } = useTheme();
 
   /* ================= SCROLL AWARE STYLE ================= */
   useEffect(() => {
@@ -78,7 +80,7 @@ export default function TopNav() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-            ? "bg-[#050b18]/90 backdrop-blur-xl border-b border-cyan-400/10 shadow-[0_4px_30px_rgba(34,211,238,0.05)]"
+            ? "theme-nav backdrop-blur-xl border-b shadow-[0_4px_30px_rgba(34,211,238,0.07)]"
             : "bg-transparent"
           }`}
       >
@@ -109,7 +111,7 @@ export default function TopNav() {
                   onClick={() => handleNavClick(section.id)}
                   className={`py-2 transition-colors text-xs font-medium tracking-[0.15em] ${active === section.id
                       ? "text-cyan-400"
-                      : "text-gray-400 hover:text-gray-200"
+                      : "text-muted hover:text-theme"
                     }`}
                 >
                   {section.label}
@@ -118,10 +120,19 @@ export default function TopNav() {
             ))}
           </ul>
 
+          <button
+            onClick={toggleTheme}
+            className="hidden md:flex absolute right-6 w-9 h-9 items-center justify-center rounded-lg border border-theme text-soft hover:border-cyan-400/50 hover:text-cyan-400 transition"
+            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+            title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+          >
+            {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+          </button>
+
           {/* MOBILE HAMBURGER */}
           <button
             onClick={() => setMobileOpen((o) => !o)}
-            className="md:hidden absolute right-6 w-9 h-9 flex items-center justify-center rounded-lg border border-white/10 text-gray-300 hover:border-cyan-400/40 hover:text-cyan-400 transition"
+            className="md:hidden absolute right-6 w-9 h-9 flex items-center justify-center rounded-lg border border-theme text-soft hover:border-cyan-400/40 hover:text-cyan-400 transition"
             aria-label="Toggle menu"
           >
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -137,16 +148,28 @@ export default function TopNav() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.25 }}
-            className="fixed top-16 left-0 right-0 z-40 bg-[#050b18]/95 backdrop-blur-2xl border-b border-cyan-400/10"
+            className="fixed top-16 left-0 right-0 z-40 theme-nav backdrop-blur-2xl border-b"
           >
             <ul className="flex flex-col py-4">
+              <li className="px-8 pb-4">
+                <button
+                  onClick={toggleTheme}
+                  className="w-full flex items-center justify-between text-sm rounded-lg border border-theme px-4 py-3 text-soft hover:border-cyan-400/40 hover:text-cyan-400 transition"
+                >
+                  <span>Theme</span>
+                  <span className="inline-flex items-center gap-2">
+                    {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                    {theme === "dark" ? "Light" : "Dark"}
+                  </span>
+                </button>
+              </li>
               {sections.map((section) => (
                 <li key={section.id}>
                   <button
                     onClick={() => handleNavClick(section.id)}
                     className={`w-full text-left px-8 py-4 text-sm tracking-widest transition ${active === section.id
                         ? "text-cyan-400 bg-cyan-400/5"
-                        : "text-gray-400 hover:text-gray-200"
+                        : "text-muted hover:text-theme"
                       }`}
                   >
                     {section.label}

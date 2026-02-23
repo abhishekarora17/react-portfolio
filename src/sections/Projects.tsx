@@ -160,24 +160,24 @@ function TiltCard({ project, index, onClick }: { project: Project; index: number
       onMouseMove={handleMouse}
       onMouseLeave={resetTilt}
       onClick={onClick}
-      className="cursor-pointer group relative rounded-2xl border border-white/8 bg-gradient-to-br from-white/[0.04] to-white/[0.01] hover:border-white/20 transition-all duration-300 overflow-hidden"
+      className="cursor-pointer group relative rounded-2xl border border-theme bg-gradient-to-br from-[var(--color-surface-soft)] to-transparent hover:border-theme-strong transition-all duration-300 overflow-hidden"
     >
       {/* Glowing top border */}
       <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${project.accent}`} />
 
       {/* Number badge */}
-      <div className="absolute top-5 right-5 text-xs font-mono text-gray-600 group-hover:text-gray-400 transition">
+      <div className="absolute top-5 right-5 text-xs font-mono text-faint group-hover:text-soft transition">
         {String(index + 1).padStart(2, "0")}
       </div>
 
       <div className="relative p-8 md:p-9">
-        <h3 className="text-lg font-semibold mb-3 pr-8 text-white group-hover:text-white transition">
+        <h3 className="text-lg font-semibold mb-3 pr-8 text-theme transition">
           {project.title}
         </h3>
 
-        <p className="text-gray-400 mb-5 text-sm leading-relaxed">{project.description}</p>
+        <p className="text-soft mb-5 text-sm leading-relaxed">{project.description}</p>
 
-        <ul className="space-y-1.5 text-sm text-gray-300 mb-6">
+        <ul className="space-y-1.5 text-sm text-soft mb-6">
           {project.highlights.map((point) => (
             <li key={point} className="flex items-start gap-2">
               <span className="text-cyan-400 mt-0.5">›</span>
@@ -190,7 +190,7 @@ function TiltCard({ project, index, onClick }: { project: Project; index: number
           {project.tech.map((t) => (
             <span
               key={t}
-              className="text-xs px-2.5 py-1 rounded-md bg-white/5 border border-white/8 text-gray-400"
+              className="text-xs px-2.5 py-1 rounded-md bg-surface border border-theme text-soft"
             >
               {t}
             </span>

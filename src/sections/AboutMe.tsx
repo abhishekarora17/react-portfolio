@@ -97,7 +97,7 @@ export default function AboutMe() {
               <div className="text-3xl font-bold text-cyan-400 mb-1 font-mono">
                 <Counter target={stat.value} suffix={stat.suffix} />
               </div>
-              <div className="text-xs text-gray-500 leading-tight">{stat.label}</div>
+              <div className="text-xs text-muted leading-tight">{stat.label}</div>
             </div>
           ))}
         </motion.div>
@@ -114,19 +114,19 @@ export default function AboutMe() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <p className="text-lg text-gray-300 leading-relaxed mb-6">
+              <p className="text-lg text-soft leading-relaxed mb-6">
                 I'm a backend-focused software developer who enjoys building
                 systems that are reliable, understandable, and built to last.
               </p>
 
-              <p className="text-gray-400 leading-relaxed mb-6">
+              <p className="text-soft leading-relaxed mb-6">
                 Over the years, I've worked on products where correctness,
                 performance, and scalability mattered more than quick wins.
                 I care deeply about writing code that other engineers can
                 confidently work with months or years later.
               </p>
 
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-soft leading-relaxed">
                 I'm most comfortable working close to the core of a system —
                 designing APIs, structuring data, and solving problems that
                 don't always have obvious answers.
@@ -150,8 +150,8 @@ export default function AboutMe() {
                   transition={{ duration: 0.4, delay: i * 0.1 }}
                   className="glass-card p-5"
                 >
-                  <h3 className="text-base font-semibold mb-1.5 text-white">{p.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">{p.body}</p>
+                  <h3 className="text-base font-semibold mb-1.5 text-theme">{p.title}</h3>
+                  <p className="text-soft text-sm leading-relaxed">{p.body}</p>
                 </motion.div>
               ))}
 
