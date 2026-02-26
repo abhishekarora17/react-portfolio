@@ -1,9 +1,12 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { Github, Linkedin, MessageCircle } from "lucide-react";
 
 const navLinks = [
   { id: "home", label: "Home" },
   { id: "what-i-do", label: "What I Do" },
+  { id: "skills", label: "Skills" },
   { id: "work", label: "Work" },
   { id: "about-me", label: "About Me" },
   { id: "contact", label: "Contact" },
@@ -33,76 +36,89 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative w-full overflow-hidden border-t border-white/8">
-      {/* Ambient glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[200px] bg-cyan-500/8 rounded-full blur-[140px]" />
-      </div>
+    <footer className="relative w-full bg-[#030712] border-t border-white/10">
 
-      <div className="relative z-10 px-8 md:px-24 pt-14 pb-8">
-        {/* Three column layout */}
+      <div className="relative px-8 md:px-24 pt-16 pb-10">
+
+        {/* Main Grid */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12"
+          className="grid grid-cols-1 md:grid-cols-3 gap-14 mb-14"
         >
           {/* Brand */}
           <div>
-            <h3 className="text-lg font-bold mb-2 text-white">Abhishek Arora</h3>
-            <p className="text-sm text-gray-500 leading-relaxed max-w-[200px]">
-              Backend developer building scalable systems and APIs.
+            <h3 className="text-xl font-semibold text-white tracking-wide">
+              Abhishek Arora
+            </h3>
+            <p className="mt-3 text-sm text-slate-400 leading-relaxed max-w-[240px]">
+              Backend developer building scalable systems and high-performance APIs.
             </p>
           </div>
 
-          {/* Nav Links */}
+          {/* Navigation */}
           <div>
-            <p className="text-xs tracking-[0.2em] text-gray-600 uppercase mb-4">Navigation</p>
-            <ul className="space-y-2.5">
+            <p className="text-xs tracking-[0.3em] text-cyan-400 uppercase mb-6">
+              Navigation
+            </p>
+
+            <ul className="space-y-3">
               {navLinks.map((link) => (
                 <li key={link.id}>
                   <button
                     onClick={() => scrollTo(link.id)}
-                    className="text-sm text-gray-500 hover:text-cyan-400 transition"
+                    className="group relative text-sm text-slate-400 hover:text-cyan-400 transition"
                   >
                     {link.label}
+                    <span className="absolute left-0 -bottom-1 w-0 h-[1px] bg-cyan-400 transition-all duration-300 group-hover:w-full" />
                   </button>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Social Icons */}
+          {/* Socials */}
           <div>
-            <p className="text-xs tracking-[0.2em] text-gray-600 uppercase mb-4">Connect</p>
-            <div className="flex items-center gap-3">
+            <p className="text-xs tracking-[0.3em] text-cyan-400 uppercase mb-6">
+              Connect
+            </p>
+
+            <div className="flex items-center gap-4">
               {socials.map(({ href, icon: Icon, label }) => (
-                <a
+                <motion.a
                   key={href}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-10 h-10 flex items-center justify-center rounded-full border border-white/10 text-gray-500 hover:border-cyan-400/40 hover:text-cyan-400 transition"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-11 h-11 flex items-center justify-center rounded-full
+                  border border-white/10
+                  text-slate-400
+                  hover:border-cyan-400/40
+                  hover:text-cyan-400
+                  transition"
                 >
                   <Icon className="w-4 h-4" />
-                </a>
+                </motion.a>
               ))}
             </div>
           </div>
         </motion.div>
 
-        {/* Bottom bar */}
-        <div className="border-t border-white/8 pt-6 flex flex-col md:flex-row items-center justify-between gap-2">
-          <p className="text-xs text-gray-600">
+        {/* Bottom Bar */}
+        <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-3">
+          <p className="text-xs text-slate-500 m-auto">
             © {new Date().getFullYear()}{" "}
-            <span className="text-gray-400 font-medium">Abhishek Arora</span>. All rights reserved.
-          </p>
-          <p className="text-xs text-gray-700">
-            Built with React · TypeScript · Tailwind CSS
+            <span className="text-slate-300 font-medium">
+              Abhishek Arora
+            </span>. All rights reserved.
           </p>
         </div>
+
       </div>
     </footer>
   );

@@ -21,6 +21,12 @@ const sectionGuides: SectionGuide[] = [
       "Here I share what I enjoy building most: backend systems, APIs, and clean scalable architecture.",
   },
   {
+    id: "skills",
+    heading: "Skills",
+    intro:
+      "This section highlights the technologies I use most, with floating skill bubbles and grouped stacks.",
+  },
+  {
     id: "work",
     heading: "Work",
     intro:

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Hero from "../sections/Hero";
 import WhatIDo from "../sections/WhatIDo";
+import Skills from "../sections/Skills";
 import Projects from "../sections/Projects";
 import AboutMe from "../sections/AboutMe";
 import Contact from "../sections/Contact";
@@ -25,6 +26,7 @@ export default function Home() {
     <>
       <Hero />
       <WhatIDo />
+      <Skills />
       <Projects />
       <AboutMe />
       <Contact />

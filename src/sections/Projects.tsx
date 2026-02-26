@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion, useMotionValue, useTransform } from "framer-motion";
+import { motion, useMotionTemplate, useMotionValue, useTransform } from "framer-motion";
 import ProjectModal from "../components/modals/ProjectModal";
 
 /* ===================== TYPES ===================== */
@@ -139,16 +139,26 @@ const projects: Project[] = [
 function TiltCard({ project, index, onClick }: { project: Project; index: number; onClick: () => void }) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
   const rotateX = useTransform(y, [-80, 80], [6, -6]);
   const rotateY = useTransform(x, [-80, 80], [-6, 6]);
+  const blueGlow = useMotionTemplate`radial-gradient(180px circle at ${mouseX}px ${mouseY}px, rgba(56,189,248,0.34) 0%, rgba(56,189,248,0.18) 32%, rgba(59,130,246,0.1) 50%, rgba(59,130,246,0) 74%)`;
 
   const handleMouse = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    x.set(e.clientX - rect.left - rect.width / 2);
-    y.set(e.clientY - rect.top - rect.height / 2);
+    const localX = e.clientX - rect.left;
+    const localY = e.clientY - rect.top;
+    x.set(localX - rect.width / 2);
+    y.set(localY - rect.height / 2);
+    mouseX.set(localX);
+    mouseY.set(localY);
   };
 
-  const resetTilt = () => { x.set(0); y.set(0); };
+  const resetTilt = () => {
+    x.set(0);
+    y.set(0);
+  };
 
   return (
     <motion.div
@@ -160,7 +170,7 @@ function TiltCard({ project, index, onClick }: { project: Project; index: number
       onMouseMove={handleMouse}
       onMouseLeave={resetTilt}
       onClick={onClick}
-      className="cursor-pointer group relative rounded-2xl border border-white/8 bg-gradient-to-br from-white/[0.04] to-white/[0.01] hover:border-white/20 transition-all duration-300 overflow-hidden"
+      className="cursor-pointer group relative rounded-2xl border border-cyan-300/30 hover:border-cyan-300/55 bg-gradient-to-br from-white/[0.035] via-white/[0.015] to-transparent transition-all duration-300 overflow-hidden shadow-[0_14px_32px_rgba(2,6,23,0.35)]"
     >
       {/* Glowing top border */}
       <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${project.accent}`} />
@@ -204,7 +214,14 @@ function TiltCard({ project, index, onClick }: { project: Project; index: number
       </div>
 
       {/* Hover glow backdrop */}
-      <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-cyan-400/[0.04] to-transparent rounded-2xl" />
+      <motion.div
+        style={{ background: blueGlow }}
+        className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"
+      />
+      <motion.div
+        style={{ background: blueGlow }}
+        className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-80 transition-opacity duration-500 rounded-2xl blur-xl"
+      />
     </motion.div>
   );
 }
