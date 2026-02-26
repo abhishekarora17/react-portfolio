@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Home, Layers, Code2, Briefcase, User2, Mail } from "lucide-react";
 import logo from "../assets/logo.png";
 
 const sections = [
-  { id: "home", label: "HOME" },
-  { id: "what-i-do", label: "WHAT I DO" },
-  { id: "skills", label: "SKILLS" },
-  { id: "work", label: "WORK" },
-  { id: "about-me", label: "ABOUT ME" },
-  { id: "contact", label: "CONTACT" },
+  { id: "home", label: "HOME", Icon: Home },
+  { id: "what-i-do", label: "WHAT I DO", Icon: Layers },
+  { id: "skills", label: "SKILLS", Icon: Code2 },
+  { id: "work", label: "WORK", Icon: Briefcase },
+  { id: "about-me", label: "ABOUT ME", Icon: User2 },
+  { id: "contact", label: "CONTACT", Icon: Mail },
 ];
 
 export default function TopNav() {
@@ -29,8 +29,7 @@ export default function TopNav() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
       const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = (window.scrollY / totalScroll) * 100;
-      setScrollProgress(progress);
+      setScrollProgress((window.scrollY / totalScroll) * 100);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -45,8 +44,9 @@ export default function TopNav() {
         const visible = entries.filter((e) => e.isIntersecting);
         if (!visible.length) return;
         const topMost = visible.reduce((prev, curr) =>
-          prev.boundingClientRect.top < curr.boundingClientRect.top ? prev : curr
-          , visible[0]);
+          prev.boundingClientRect.top < curr.boundingClientRect.top ? prev : curr,
+          visible[0]
+        );
         setActive(topMost.target.id);
       },
       { rootMargin: "-50% 0px -50% 0px", threshold: 0 }
@@ -70,7 +70,7 @@ export default function TopNav() {
     indicatorRef.current.style.width = `${item.offsetWidth}px`;
   }, [active]);
 
-  /* ================= NAV CLICK HANDLER ================= */
+  /* ================= NAV CLICK ================= */
   const handleNavClick = (sectionId: string) => {
     setActive(sectionId);
     setMobileOpen(false);
@@ -84,49 +84,45 @@ export default function TopNav() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 px-3 md:px-6 transition-all duration-300 ${scrolled
-          ? "pt-2 md:pt-3"
-          : "pt-3 md:pt-4"
+        className={`fixed top-0 left-0 right-0 z-50 px-3 md:px-6 transition-all duration-300 ${scrolled ? "pt-2 md:pt-3" : "pt-3 md:pt-5"
           }`}
       >
         <nav
-          className={`relative max-w-8xl mx-auto h-16 md:h-[72px] px-5 md:px-8 flex items-center justify-between rounded-2xl border transition-all duration-400 overflow-hidden ${scrolled
-            ? "bg-[#0a0f1e]/40 backdrop-blur-3xl border-cyan-400/30 shadow-[0_12px_40px_rgba(8,145,178,0.25)]"
-            : "bg-slate-950/15 backdrop-blur-2xl border-white/15 shadow-[0_10px_28px_rgba(2,6,23,0.2)]"
+          className={`relative max-w-8xl mx-auto h-14 md:h-[68px] px-40 md:px-12 flex items-center justify-between rounded-2xl border transition-all duration-400 overflow-hidden ${scrolled
+              ? "bg-[#080e20]/60 backdrop-blur-[40px] border-cyan-400/35 shadow-[0_8px_32px_rgba(8,145,178,0.2),0_0_0_1px_rgba(34,211,238,0.06)]"
+              : "bg-slate-950/10 backdrop-blur-2xl border-white/10 shadow-[0_8px_24px_rgba(2,6,23,0.15)]"
             }`}
         >
           {/* SCROLL PROGRESS LINE */}
           <motion.div
-            className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent z-50"
+            className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-cyan-300/80 z-50 rounded-r-full"
             style={{ width: `${scrollProgress}%` }}
           />
+
           {/* LOGO */}
           <button
             onClick={() => handleNavClick("home")}
-            className="absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 flex items-center justify-center rounded-xl  ring-white/10 px-1/2 py-1/2 "
+            className="absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 flex items-center justify-center"
           >
-            <img src={logo} alt="Abhishek Logo" className="h-16 md:h-16 align-middle" />
+            <img src={logo} alt="Abhishek Logo" className="h-12 md:h-14" />
           </button>
 
           {/* NAV LINKS (DESKTOP) */}
-          <ul
-            ref={navRef}
-            className="relative hidden md:flex gap-2 h-full items-center text-sm"
-          >
-            {/* ACTIVE INDICATOR BAR */}
+          <ul ref={navRef} className="relative hidden md:flex gap-1 h-full items-center text-sm">
+            {/* ACTIVE INDICATOR PILL */}
             <motion.div
               ref={indicatorRef}
-              className="absolute top-1/2 -mt-[18px] h-9 rounded-xl bg-cyan-400/20 border border-cyan-300/40 shadow-[0_0_20px_rgba(34,211,238,0.3)]"
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              className="absolute top-1/2 -mt-[17px] h-[34px] rounded-xl bg-gradient-to-r from-cyan-400/15 to-cyan-500/10 border border-cyan-300/30 shadow-[0_0_16px_rgba(34,211,238,0.25),inset_0_1px_0_rgba(34,211,238,0.15)]"
+              transition={{ type: "spring", stiffness: 350, damping: 32 }}
             />
 
             {sections.map((section) => (
               <li key={section.id}>
                 <button
                   onClick={() => handleNavClick(section.id)}
-                  className={`relative z-10 h-9 px-4 rounded-xl transition-colors text-xs font-semibold tracking-[0.14em] ${active === section.id
-                    ? "text-cyan-200"
-                    : "text-slate-300 hover:text-white"
+                  className={`relative z-10 h-[34px] px-4 rounded-xl transition-all duration-200 text-[11px] font-semibold tracking-[0.13em] ${active === section.id
+                      ? "text-cyan-200"
+                      : "text-slate-400 hover:text-slate-200"
                     }`}
                 >
                   {section.label}
@@ -138,10 +134,20 @@ export default function TopNav() {
           {/* MOBILE HAMBURGER */}
           <button
             onClick={() => setMobileOpen((o) => !o)}
-            className="md:hidden absolute right-5 w-10 h-10 flex items-center justify-center rounded-xl border border-white/15 bg-slate-900/40 text-slate-200 hover:border-cyan-400/40 hover:text-cyan-300 transition"
+            className="md:hidden absolute right-4 w-9 h-9 flex items-center justify-center rounded-xl border border-white/12 bg-slate-900/50 text-slate-300 hover:border-cyan-400/40 hover:text-cyan-300 hover:bg-cyan-400/10 transition-all"
             aria-label="Toggle menu"
           >
-            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.span
+                key={mobileOpen ? "x" : "menu"}
+                initial={{ opacity: 0, rotate: -30, scale: 0.7 }}
+                animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                exit={{ opacity: 0, rotate: 30, scale: 0.7 }}
+                transition={{ duration: 0.15 }}
+              >
+                {mobileOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+              </motion.span>
+            </AnimatePresence>
           </button>
         </nav>
       </header>
@@ -150,32 +156,46 @@ export default function TopNav() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: -20 }}
+            initial={{ opacity: 0, scale: 0.96, y: -16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: -20 }}
-            transition={{ type: "spring", damping: 20, stiffness: 300 }}
-            className="fixed top-[78px] md:top-[88px] left-3 right-3 z-40 bg-slate-950/95 backdrop-blur-3xl border border-cyan-400/30 rounded-2xl shadow-[0_24px_50px_rgba(0,0,0,0.6)] overflow-hidden"
+            exit={{ opacity: 0, scale: 0.96, y: -16 }}
+            transition={{ type: "spring", damping: 22, stiffness: 320 }}
+            className="fixed top-[72px] left-3 right-3 z-40 bg-[#080e20]/95 backdrop-blur-[40px] border border-cyan-400/25 rounded-2xl shadow-[0_24px_60px_rgba(0,0,0,0.7),0_0_0_1px_rgba(34,211,238,0.06)] overflow-hidden"
           >
-            <ul className="flex flex-col py-4">
-              {sections.map((section, idx) => (
-                <motion.li
-                  key={section.id}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.05 }}
-                >
-                  <button
-                    onClick={() => handleNavClick(section.id)}
-                    className={`w-full text-left px-8 py-4 text-xs font-bold tracking-[0.2em] transition-all border-l-2 ${active === section.id
-                      ? "text-cyan-300 bg-cyan-400/10 border-cyan-400"
-                      : "text-slate-400 hover:text-white border-transparent hover:bg-white/5"
-                      }`}
+            {/* Top accent line */}
+            <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent" />
+
+            <ul className="flex flex-col py-3">
+              {sections.map((section, idx) => {
+                const Icon = section.Icon;
+                const isActive = active === section.id;
+                return (
+                  <motion.li
+                    key={section.id}
+                    initial={{ opacity: 0, x: -12 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.04 }}
                   >
-                    {section.label}
-                  </button>
-                </motion.li>
-              ))}
+                    <button
+                      onClick={() => handleNavClick(section.id)}
+                      className={`w-full text-left px-6 py-3.5 flex items-center gap-3.5 text-[11px] font-bold tracking-[0.18em] transition-all border-l-2 ${isActive
+                          ? "text-cyan-300 bg-cyan-400/8 border-cyan-400"
+                          : "text-slate-400 hover:text-white border-transparent hover:bg-white/[0.03]"
+                        }`}
+                    >
+                      <Icon className={`w-3.5 h-3.5 shrink-0 ${isActive ? "text-cyan-400" : "text-slate-600"}`} />
+                      {section.label}
+                      {isActive && (
+                        <span className="ml-auto w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_6px_rgba(34,211,238,0.8)]" />
+                      )}
+                    </button>
+                  </motion.li>
+                );
+              })}
             </ul>
+
+            {/* Bottom accent line */}
+            <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-white/8 to-transparent" />
           </motion.div>
         )}
       </AnimatePresence>

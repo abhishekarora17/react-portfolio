@@ -36,7 +36,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative w-full bg-[#030712] border-t border-white/10">
+    <footer className="relative w-full bg-[#0c0e12] border-t border-white/[0.08]">
 
       <div className="relative px-8 md:px-24 pt-16 pb-10">
 
