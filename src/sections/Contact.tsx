@@ -48,8 +48,8 @@ export default function Contact() {
     >
       {/* ================= AMBIENT BACKGROUND ================= */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-40 left-1/4 w-[520px] h-[520px] bg-cyan-500/10 rounded-full blur-[240px]" />
-        <div className="absolute bottom-0 right-1/4 w-[620px] h-[620px] bg-blue-500/8 rounded-full blur-[280px]" />
+        <div className="absolute -top-40 left-1/4 w-[520px] h-[520px] bg-cyan-500/[0.04] rounded-full blur-[260px]" />
+        <div className="absolute bottom-0 right-1/4 w-[620px] h-[620px] bg-blue-500/[0.03] rounded-full blur-[300px]" />
       </div>
 
       {/* ================= CONTENT ================= */}
@@ -63,7 +63,7 @@ export default function Contact() {
           className="mb-6"
         >
           {/* Availability badge */}
-          <div className="inline-flex items-center gap-2 mb-4 px-3 py-1.5 rounded-full bg-emerald-400/10 border border-emerald-400/20">
+          <div className="inline-flex items-center gap-2 mb-4 px-3 py-1.5 rounded-full bg-emerald-400/[0.07] border border-emerald-400/[0.12]">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <span className="text-xs text-emerald-400 font-medium">Available for opportunities</span>
           </div>
@@ -80,12 +80,9 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="relative max-w-5xl mx-auto w-full"
         >
-          {/* Ambient border glow */}
-          <div className="pointer-events-none absolute -inset-1 rounded-2xl bg-gradient-to-br from-cyan-400/20 via-blue-500/8 to-transparent blur-xl opacity-70" />
-
           <form
             onSubmit={handleSubmit}
-            className="relative rounded-2xl bg-gradient-to-br from-white/[0.04] to-transparent border border-white/[0.04] p-8 backdrop-blur-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
+            className="relative rounded-2xl border border-white/[0.05] p-8"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* LEFT */}
