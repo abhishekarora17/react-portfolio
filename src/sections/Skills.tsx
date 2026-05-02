@@ -90,7 +90,7 @@ function SkillCard({ category, skills }: { category: string; skills: Tech[] }) {
             whileHover={{ x: 3 }}
             transition={{ type: "spring", stiffness: 400, damping: 30 }}
           >
-            <div className="w-8 h-8 rounded-lg bg-white/[0.05] flex items-center justify-center border border-white/10 group-hover:border-cyan-400/30 group-hover:bg-cyan-400/10 transition-all duration-300 shrink-0">
+            <div className="w-8 h-8 rounded-lg bg-white/[0.05] flex items-center justify-center border border-white/[0.05] group-hover:border-cyan-400/30 group-hover:bg-cyan-400/10 transition-all duration-300 shrink-0">
               <img src={tech.icon} className="w-4 h-4" alt={tech.name} />
             </div>
             <span className="text-sm text-slate-300 group-hover:text-white transition-colors duration-200">{tech.name}</span>
@@ -209,11 +209,11 @@ export default function SkillsSection() {
 
       {/* Section Header */}
       <div className="relative z-10 max-w-6xl mx-10 mb-40">
-        <p className="text-xs tracking-[0.4em] text-cyan-400 uppercase mb-3">Technical Expertise</p>
+        <p className="eyebrow">Technical Expertise</p>
         <h2 className="text-3xl md:text-4xl font-bold text-white leading-snug">
           Skills & Technologies
         </h2>
-        <p className="mt-3 text-slate-400 text-sm max-w-lg">
+        <p className="mt-3 text-slate-500 text-sm max-w-lg">
           A curated stack I use daily to build reliable, high-performance systems.
         </p>
       </div>
@@ -234,8 +234,8 @@ export default function SkillsSection() {
           className="relative flex items-center justify-center h-[380px] md:h-[560px] mb-16 select-none"
         >
           {/* Core sphere */}
-          <div className="absolute w-24 h-24 md:w-32 md:h-32 rounded-full bg-gradient-to-br from-cyan-400/90 to-blue-600 flex items-center justify-center text-white font-bold text-xs md:text-sm border border-white/20 shadow-[0_0_60px_rgba(34,211,238,0.5)] z-10">
-            <span className="tracking-widest">SKILLS</span>
+          <div className="absolute w-24 h-24 md:w-32 md:h-32 rounded-full bg-gradient-to-br from-cyan-400 via-blue-500 to-violet-600 flex items-center justify-center text-white font-bold text-xs md:text-sm border border-white/10 shadow-[0_0_80px_rgba(34,211,238,0.45),0_0_40px_rgba(139,92,246,0.3)] z-10">
+            <span className="tracking-widest font-mono">SKILLS</span>
           </div>
 
           {/* Pulsing core ring */}

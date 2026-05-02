@@ -68,7 +68,7 @@ export default function Contact() {
             <span className="text-xs text-emerald-400 font-medium">Available for opportunities</span>
           </div>
 
-          <p className="text-xs tracking-[0.3em] text-cyan-400 uppercase mb-3">Contact</p>
+          <p className="eyebrow">Contact</p>
           <h2 className="text-3xl md:text-4xl font-bold mb-16">Let's Connect</h2>
         </motion.div>
 
@@ -85,7 +85,7 @@ export default function Contact() {
 
           <form
             onSubmit={handleSubmit}
-            className="relative rounded-2xl bg-black/50 border border-white/10 p-8"
+            className="relative rounded-2xl bg-gradient-to-br from-white/[0.04] to-transparent border border-white/[0.04] p-8 backdrop-blur-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* LEFT */}
@@ -139,15 +139,10 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="mt-5 relative inline-flex items-center gap-2 self-start px-7 py-3 rounded-lg text-cyan-300 text-sm font-medium border border-cyan-400/30 overflow-hidden disabled:opacity-50 hover:border-cyan-400/60 hover:shadow-[0_0_20px_rgba(34,211,238,0.2)] transition-all"
+                  className="mt-5 btn-primary self-start disabled:opacity-50"
                 >
-                  {!loading && (
-                    <span className="absolute inset-0 shimmer-btn opacity-60" />
-                  )}
-                  <span className="relative flex items-center gap-2">
-                    <Send className="w-4 h-4" />
-                    {loading ? "Sending..." : "Send Message"}
-                  </span>
+                  <Send className="w-4 h-4" />
+                  {loading ? "Sending..." : "Send Message"}
                 </button>
 
                 {sent && (

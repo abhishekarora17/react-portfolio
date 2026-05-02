@@ -36,7 +36,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative w-full bg-[#0c0e12] border-t border-white/[0.08]">
+    <footer className="relative w-full bg-[#03070f] border-t border-white/[0.06]">
 
       <div className="relative px-8 md:px-24 pt-16 pb-10">
 
@@ -60,9 +60,7 @@ export default function Footer() {
 
           {/* Navigation */}
           <div>
-            <p className="text-xs tracking-[0.3em] text-cyan-400 uppercase mb-6">
-              Navigation
-            </p>
+            <p className="eyebrow mb-6">Navigation</p>
 
             <ul className="space-y-3">
               {navLinks.map((link) => (
@@ -81,9 +79,7 @@ export default function Footer() {
 
           {/* Socials */}
           <div>
-            <p className="text-xs tracking-[0.3em] text-cyan-400 uppercase mb-6">
-              Connect
-            </p>
+            <p className="eyebrow mb-6">Connect</p>
 
             <div className="flex items-center gap-4">
               {socials.map(({ href, icon: Icon, label }) => (
@@ -96,7 +92,7 @@ export default function Footer() {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   className="w-11 h-11 flex items-center justify-center rounded-full
-                  border border-white/10
+                  border border-white/[0.05]
                   text-slate-400
                   hover:border-cyan-400/40
                   hover:text-cyan-400
@@ -110,7 +106,7 @@ export default function Footer() {
         </motion.div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-3">
+        <div className="border-t border-white/[0.05] pt-6 flex flex-col md:flex-row items-center justify-between gap-3">
           <p className="text-xs text-slate-500 m-auto">
             © {new Date().getFullYear()}{" "}
             <span className="text-slate-300 font-medium">

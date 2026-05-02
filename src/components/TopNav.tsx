@@ -89,8 +89,8 @@ export default function TopNav() {
       >
         <nav
           className={`relative max-w-8xl mx-auto h-14 md:h-[68px] px-40 md:px-12 flex items-center justify-between rounded-2xl border transition-all duration-400 overflow-hidden ${scrolled
-              ? "bg-[#080e20]/60 backdrop-blur-[40px] border-cyan-400/35 shadow-[0_8px_32px_rgba(8,145,178,0.2),0_0_0_1px_rgba(34,211,238,0.06)]"
-              : "bg-slate-950/10 backdrop-blur-2xl border-white/10 shadow-[0_8px_24px_rgba(2,6,23,0.15)]"
+              ? "bg-[#03070f]/75 backdrop-blur-[48px] border-white/[0.05] shadow-[0_8px_40px_rgba(0,0,0,0.6),0_0_0_1px_rgba(34,211,238,0.07),inset_0_1px_0_rgba(255,255,255,0.04)]"
+              : "bg-[#03070f]/20 backdrop-blur-2xl border-white/[0.04] shadow-[0_4px_24px_rgba(2,6,23,0.2)]"
             }`}
         >
           {/* SCROLL PROGRESS LINE */}
@@ -112,8 +112,8 @@ export default function TopNav() {
             {/* ACTIVE INDICATOR PILL */}
             <motion.div
               ref={indicatorRef}
-              className="absolute top-1/2 -mt-[17px] h-[34px] rounded-xl bg-gradient-to-r from-cyan-400/15 to-cyan-500/10 border border-cyan-300/30 shadow-[0_0_16px_rgba(34,211,238,0.25),inset_0_1px_0_rgba(34,211,238,0.15)]"
-              transition={{ type: "spring", stiffness: 350, damping: 32 }}
+              className="absolute top-1/2 -mt-[17px] h-[34px] rounded-xl bg-gradient-to-r from-cyan-400/12 via-indigo-500/10 to-cyan-400/8 border border-cyan-300/25 shadow-[0_0_20px_rgba(34,211,238,0.18),inset_0_1px_0_rgba(34,211,238,0.12)]"
+              transition={{ type: "spring", stiffness: 380, damping: 35 }}
             />
 
             {sections.map((section) => (
@@ -134,7 +134,7 @@ export default function TopNav() {
           {/* MOBILE HAMBURGER */}
           <button
             onClick={() => setMobileOpen((o) => !o)}
-            className="md:hidden absolute right-4 w-9 h-9 flex items-center justify-center rounded-xl border border-white/12 bg-slate-900/50 text-slate-300 hover:border-cyan-400/40 hover:text-cyan-300 hover:bg-cyan-400/10 transition-all"
+            className="md:hidden absolute right-4 w-9 h-9 flex items-center justify-center rounded-xl border border-white/[0.06] bg-slate-900/50 text-slate-300 hover:border-cyan-400/40 hover:text-cyan-300 hover:bg-cyan-400/10 transition-all"
             aria-label="Toggle menu"
           >
             <AnimatePresence mode="wait" initial={false}>

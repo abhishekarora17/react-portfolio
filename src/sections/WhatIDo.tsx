@@ -49,7 +49,6 @@ export default function WhatIDo() {
 
   const active = capabilities[activeIndex];
 
-  // Lock panel height to tallest content
   useEffect(() => {
     if (!measureRef.current) return;
     let max = 0;
@@ -59,7 +58,6 @@ export default function WhatIDo() {
     setPanelHeight(max);
   }, []);
 
-  // Auto-advance every 4 seconds
   const startTimer = () => {
     if (timerRef.current) clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
@@ -74,43 +72,40 @@ export default function WhatIDo() {
 
   const handleClick = (index: number) => {
     setActiveIndex(index);
-    startTimer(); // Reset timer on manual click
+    startTimer();
   };
 
   return (
     <section
       id="what-i-do"
-      className="relative min-h-[90vh] md:min-h-[unset] w-full pt-16 md:pt-24 pb-24 overflow-hidden"
+      className="relative min-h-[90vh] md:min-h-[unset] w-full pt-16 md:pt-28 pb-28 overflow-hidden"
     >
-      {/* ================= AMBIENT BACKGROUND ================= */}
+      {/* Ambient */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-20 left-1/4 w-[520px] h-[520px] bg-cyan-500/10 rounded-full blur-[240px]" />
-        <div className="absolute bottom-0 right-1/4 w-[620px] h-[300px] bg-blue-500/8 rounded-full blur-[280px]" />
+        <div className="absolute -top-20 left-1/4 w-[560px] h-[560px] bg-cyan-500/7 rounded-full blur-[260px]" />
+        <div className="absolute bottom-0 right-1/4 w-[480px] h-[300px] bg-violet-500/6 rounded-full blur-[220px]" />
       </div>
 
-      {/* ================= CONTENT ================= */}
       <div className="relative z-10 px-8 md:px-24">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-14"
+          transition={{ duration: 0.55 }}
+          className="mb-16"
         >
-          <p className="text-xs tracking-[0.3em] text-cyan-400 uppercase mb-3">Capabilities</p>
+          <p className="eyebrow">Capabilities</p>
           <h2 className="text-3xl md:text-4xl font-bold">What I Do</h2>
         </motion.div>
 
-        {/* ================= TWO COLUMN LAYOUT ================= */}
+        {/* Two column */}
         <div className="relative">
-          <div
-            className="pointer-events-none absolute left-[280px] top-0 h-full w-px bg-gradient-to-b from-transparent via-cyan-400/20 to-transparent hidden md:block"
-          />
+          <div className="pointer-events-none absolute left-[280px] top-0 h-full w-px bg-gradient-to-b from-transparent via-white/6 to-transparent hidden md:block" />
 
           <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-16">
-            {/* ================= LEFT: STEP SELECTOR ================= */}
-            <div className="space-y-3">
+            {/* LEFT: Step selector */}
+            <div className="space-y-2">
               {capabilities.map((item, index) => {
                 const isActive = index === activeIndex;
                 const Icon = item.icon;
@@ -119,28 +114,38 @@ export default function WhatIDo() {
                   <motion.button
                     key={item.id}
                     onClick={() => handleClick(index)}
-                    whileHover={{ x: 4 }}
+                    whileHover={{ x: 3 }}
                     transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                    className={`group w-full text-left rounded-xl p-4 transition-all border ${isActive
-                        ? "border-cyan-400/30 bg-cyan-400/5 shadow-[0_0_20px_rgba(34,211,238,0.08)]"
-                        : "border-transparent hover:border-white/10 hover:bg-white/[0.02]"
-                      }`}
+                    className={`group w-full text-left rounded-xl p-4 transition-all border ${
+                      isActive
+                        ? "border-cyan-400/25 bg-gradient-to-r from-cyan-400/8 to-indigo-500/5 shadow-[0_0_24px_rgba(34,211,238,0.07)]"
+                        : "border-transparent hover:border-white/8 hover:bg-white/[0.02]"
+                    }`}
                   >
                     <div className="flex items-center gap-4">
                       <div
-                        className={`w-10 h-10 flex items-center justify-center rounded-lg transition-all ${isActive
-                            ? "bg-cyan-400/20 text-cyan-300 shadow-[0_0_14px_rgba(34,211,238,0.3)]"
-                            : "bg-white/5 text-gray-500 group-hover:text-gray-300"
-                          }`}
+                        className={`w-10 h-10 flex items-center justify-center rounded-lg transition-all ${
+                          isActive
+                            ? "bg-gradient-to-br from-cyan-400/25 to-indigo-500/20 text-cyan-300 shadow-[0_0_16px_rgba(34,211,238,0.25)]"
+                            : "bg-white/4 text-slate-600 group-hover:text-slate-400"
+                        }`}
                       >
                         <Icon className="w-4 h-4" />
                       </div>
 
                       <div>
-                        <span className={`block text-[10px] font-mono tracking-widest mb-0.5 ${isActive ? "text-cyan-400" : "text-gray-600"}`}>
+                        <span
+                          className={`block text-[10px] font-mono tracking-[0.2em] mb-0.5 ${
+                            isActive ? "text-cyan-400" : "text-slate-700"
+                          }`}
+                        >
                           {item.id}
                         </span>
-                        <span className={`font-medium text-sm transition ${isActive ? "text-white" : "text-gray-400"}`}>
+                        <span
+                          className={`font-semibold text-sm transition ${
+                            isActive ? "text-white" : "text-slate-500"
+                          }`}
+                        >
                           {item.title}
                         </span>
                       </div>
@@ -150,9 +155,8 @@ export default function WhatIDo() {
               })}
             </div>
 
-            {/* ================= RIGHT: DETAIL PANEL ================= */}
+            {/* RIGHT: Detail panel */}
             <div className="relative" style={{ minHeight: panelHeight ?? "auto" }}>
-              {/* Hidden measure container */}
               <div ref={measureRef} className="absolute invisible pointer-events-none">
                 {capabilities.map((item) => (
                   <div key={item.id} className="py-4">
@@ -171,34 +175,33 @@ export default function WhatIDo() {
                   initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -14 }}
-                  transition={{ duration: 0.35 }}
+                  transition={{ duration: 0.3 }}
                   className="py-4"
                 >
-                  <h3 className="text-2xl md:text-3xl font-bold mb-4">{active.title}</h3>
+                  <h3 className="text-2xl md:text-3xl font-bold mb-4 tracking-tight">{active.title}</h3>
 
-                  <p className="text-gray-400 max-w-xl mb-8 leading-relaxed">{active.description}</p>
+                  <p className="text-slate-400 max-w-xl mb-8 leading-relaxed">{active.description}</p>
 
-                  {/* Pill badges */}
-                  <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-wrap gap-2.5">
                     {active.points.map((p) => (
                       <span
                         key={p}
-                        className="inline-flex items-center gap-1.5 text-sm px-4 py-2 rounded-full border border-cyan-400/20 bg-cyan-400/5 text-cyan-300"
+                        className="inline-flex items-center gap-2 text-sm px-4 py-2 rounded-full border border-cyan-400/15 bg-gradient-to-r from-cyan-400/6 to-indigo-500/4 text-cyan-300/90 backdrop-blur-sm"
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 inline-block" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400/80" />
                         {p}
                       </span>
                     ))}
                   </div>
 
-                  {/* Auto-advance progress bar */}
-                  <div className="mt-10 h-px w-full bg-white/5 relative overflow-hidden rounded-full">
+                  {/* Progress bar */}
+                  <div className="mt-10 h-px w-full bg-white/4 relative overflow-hidden rounded-full">
                     <motion.div
                       key={activeIndex}
                       initial={{ width: "0%" }}
                       animate={{ width: "100%" }}
                       transition={{ duration: 4, ease: "linear" }}
-                      className="absolute inset-y-0 left-0 bg-gradient-to-r from-cyan-400/60 to-cyan-400 rounded-full"
+                      className="absolute inset-y-0 left-0 bg-gradient-to-r from-cyan-400/50 via-indigo-400/60 to-cyan-400 rounded-full"
                     />
                   </div>
                 </motion.div>

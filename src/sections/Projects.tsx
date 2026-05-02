@@ -170,7 +170,7 @@ function TiltCard({ project, index, onClick }: { project: Project; index: number
       onMouseMove={handleMouse}
       onMouseLeave={resetTilt}
       onClick={onClick}
-      className="cursor-pointer group relative rounded-2xl border border-cyan-300/30 hover:border-cyan-300/55 bg-gradient-to-br from-white/[0.035] via-white/[0.015] to-transparent transition-all duration-300 overflow-hidden shadow-[0_14px_32px_rgba(2,6,23,0.35)]"
+      className="cursor-pointer group relative rounded-2xl border border-white/[0.04] hover:border-cyan-300/35 bg-gradient-to-br from-white/[0.04] via-white/[0.015] to-transparent transition-all duration-300 overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.04)] hover:shadow-[0_16px_48px_rgba(0,0,0,0.5),0_0_0_1px_rgba(34,211,238,0.12)]"
     >
       {/* Glowing top border */}
       <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${project.accent}`} />
@@ -200,7 +200,7 @@ function TiltCard({ project, index, onClick }: { project: Project; index: number
           {project.tech.map((t) => (
             <span
               key={t}
-              className="text-xs px-2.5 py-1 rounded-md bg-white/5 border border-white/8 text-gray-400"
+              className="text-xs px-2.5 py-1 rounded-md bg-white/4 border border-white/[0.04] text-slate-500 group-hover:border-white/[0.06] group-hover:text-slate-400 transition-colors duration-200"
             >
               {t}
             </span>
@@ -250,7 +250,7 @@ export default function Projects() {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <p className="text-xs tracking-[0.3em] text-cyan-400 uppercase mb-3">Portfolio</p>
+          <p className="eyebrow">Portfolio</p>
           <h2 className="text-3xl md:text-4xl font-bold">Works I Have Done</h2>
         </motion.div>
 
