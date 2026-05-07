@@ -1,12 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://abhishekarora17.netlify.app/</loc>
-  </url>
-  <url>
-    <loc>https://abhishekarora17.netlify.app/about</loc>
-  </url>
-  <url>
-    <loc>https://abhishekarora17.netlify.app/valentine</loc>
-  </url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!--  created with Free Online Sitemap Generator www.xml-sitemaps.com  -->
+<url>
+  <loc>https://www.abhishekarora.co.in/</loc>
+  <lastmod>2026-05-07T08:13:10+00:00</lastmod>
+</url>
+<url>
+  <loc>https://www.abhishekarora.co.in/about</loc>
+  <lastmod>2026-05-07T08:13:10+00:00</lastmod>
+</url>
+<url>
+  <loc>https://www.abhishekarora.co.in/valentine</loc>
+  <lastmod>2026-05-07T08:13:10+00:00</lastmod>
+</url>
 </urlset>
